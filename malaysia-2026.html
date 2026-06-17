@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🇲🇾 马来西亚亲子游 · 吉隆坡+槟城 8天行程</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: #f5f2eb;
+  color: #2d2d2d;
+  line-height: 1.7;
+  padding: 0 0 60px 0;
+}
+.header {
+  background: linear-gradient(135deg, #1a3a5c 0%, #2d6a9f 50%, #3c8dbc 100%);
+  color: white;
+  padding: 40px 20px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.header::after {
+  content: "✈️ 🍈 🌴";
+  position: absolute;
+  font-size: 80px;
+  opacity: 0.08;
+  right: -10px;
+  bottom: -10px;
+  transform: rotate(-15deg);
+}
+.header h1 { font-size: 28px; margin-bottom: 6px; letter-spacing: 2px; }
+.header .subtitle { font-size: 15px; opacity: 0.85; }
+.header .flight-info {
+  margin-top: 16px;
+  background: rgba(255,255,255,0.12);
+  display: inline-block;
+  padding: 8px 20px;
+  border-radius: 20px;
+  font-size: 14px;
+}
+.summary-bar {
+  background: white;
+  padding: 18px 20px;
+  margin: -10px 15px 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 10px;
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+.summary-bar .item { flex: 1; min-width: 100px; }
+.summary-bar .num { font-size: 22px; font-weight: 700; color: #2d6a9f; }
+.summary-bar .label { font-size: 12px; color: #888; }
+.container { max-width: 700px; margin: 0 auto; padding: 0 15px; }
+.day-card {
+  background: white;
+  border-radius: 14px;
+  padding: 20px;
+  margin-bottom: 14px;
+  box-shadow: 0 1px 8px rgba(0,0,0,0.05);
+  border-left: 4px solid #3c8dbc;
+}
+.day-card.highlight { border-left-color: #e8a838; background: #fffbf0; }
+.day-card.durian { border-left-color: #6b8c42; background: #f4f8ee; }
+.day-card.fly { border-left-color: #8e6baf; background: #f5f0f8; }
+.day-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.day-header .date {
+  font-size: 13px;
+  color: #999;
+}
+.day-header .badge {
+  font-size: 11px;
+  background: #3c8dbc;
+  color: white;
+  padding: 2px 10px;
+  border-radius: 10px;
+}
+.day-card.highlight .badge { background: #e8a838; }
+.day-card.durian .badge { background: #6b8c42; }
+.day-card.fly .badge { background: #8e6baf; }
+.day-title { font-size: 17px; font-weight: 700; }
+.time-row {
+  display: flex;
+  gap: 10px;
+  padding: 6px 0;
+  border-bottom: 1px dashed #eee;
+  align-items: baseline;
+}
+.time-row:last-child { border-bottom: none; }
+.time-row .time {
+  font-size: 13px;
+  font-weight: 600;
+  color: #3c8dbc;
+  min-width: 75px;
+  flex-shrink: 0;
+}
+.time-row .content { font-size: 14px; }
+.time-row .content .emoji { margin-right: 4px; }
+.note-box {
+  background: #eef6fb;
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin: 14px 0;
+  font-size: 14px;
+  line-height: 1.6;
+}
+.note-box.durian { background: #edf3e4; }
+.note-box.warn { background: #fff6e0; }
+.note-box .title { font-weight: 700; margin-bottom: 4px; }
+.tag {
+  display: inline-block;
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 8px;
+  margin-right: 4px;
+}
+.tag-green { background: #e0f0d0; color: #3a6b1a; }
+.tag-orange { background: #fdebd0; color: #a0670a; }
+.tag-blue { background: #d6eaf8; color: #1a5276; }
+.tag-purple { background: #e8daf5; color: #5b2c8a; }
+.footer {
+  text-align: center;
+  padding: 30px 20px;
+  font-size: 13px;
+  color: #999;
+}
+.emoji-lg { font-size: 20px; }
+@media (max-width: 480px) {
+  .header h1 { font-size: 24px; }
+  .summary-bar { margin: -10px 10px 16px; padding: 14px; }
+  .day-card { padding: 16px; }
+  .time-row .time { min-width: 65px; font-size: 12px; }
+  .time-row .content { font-size: 13px; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>🇲🇾 吉隆坡 + 槟城 · 亲子游</h1>
+  <div class="subtitle">8天7晚 · 榴莲自由 🍈 · 8岁娃友好</div>
+  <div class="flight-info">
+    ✈️ 7/3 CZ349 广州08:30→吉隆坡12:45 &nbsp;·&nbsp; 7/11 CZ3048 吉隆坡14:45→广州19:10
+  </div>
+</div>
+
+<div class="summary-bar">
+  <div class="item">
+    <div class="num">7/3→7/11</div>
+    <div class="label">📅 出行日期</div>
+  </div>
+  <div class="item">
+    <div class="num">¥7,473</div>
+    <div class="label">💰 三人机票</div>
+  </div>
+  <div class="item">
+    <div class="num">🍈</div>
+    <div class="label">榴莲季 · 吃到爽</div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- Day 1 -->
+  <div class="day-card fly">
+    <div class="day-header">
+      <span class="day-title">📅 Day 1 · 7/3（周五）抵达吉隆坡</span>
+      <span class="badge">✈️ 飞行日</span>
+    </div>
+    <div class="day-header"><span class="date">08:30 → 12:45 · CZ349 · 空客A350</span></div>
+    <div class="time-row"><span class="time">08:30→12:45</span><span class="content"><span class="emoji">✈️</span>广州飞吉隆坡，中午到</span></div>
+    <div class="time-row"><span class="time">13:30</span><span class="content"><span class="emoji">🏨</span>入住KLCC附近酒店</span></div>
+    <div class="time-row"><span class="time">15:00→</span><span class="content"><span class="emoji">🗼</span>双子塔 + KLCC公园溜达</span></div>
+    <div class="time-row"><span class="time">18:30→</span><span class="content"><span class="emoji">🍜</span><b>阿罗街夜市</b> — 沙爹串、烧鱼、第一口榴莲！</span></div>
+  </div>
+
+  <!-- Day 2 -->
+  <div class="day-card">
+    <div class="day-header">
+      <span class="day-title">📅 Day 2 · 7/4（周六）吉隆坡</span>
+      <span class="badge">🎯 亲子日</span>
+    </div>
+    <div class="time-row"><span class="time">09:00→12:00</span><span class="content"><span class="emoji">🧪</span><b>Petrosains科学馆</b> — 8岁娃进去出不来，互动体验超多 ⭐</span></div>
+    <div class="time-row"><span class="time">12:00→13:00</span><span class="content"><span class="emoji">🍽️</span>双子塔底下午餐</span></div>
+    <div class="time-row"><span class="time">13:30→15:30</span><span class="content"><span class="emoji">🐟</span><b>Aquaria KLCC水族馆</b> — 海底隧道看鲨鱼</span></div>
+    <div class="time-row"><span class="time">16:00→17:30</span><span class="content"><span class="emoji">🐒</span><b>黑风洞</b> — 272级彩色阶梯，孩子当爬楼梯游戏</span></div>
+    <div class="time-row"><span class="time">晚上</span><span class="content"><span class="emoji">🏊</span>酒店泳池玩水</span></div>
+  </div>
+
+  <!-- Day 3 -->
+  <div class="day-card fly">
+    <div class="day-header">
+      <span class="day-title">📅 Day 3 · 7/5（周日）吉隆坡→槟城</span>
+      <span class="badge">✈️ 转场</span>
+    </div>
+    <div class="time-row"><span class="time">上午</span><span class="content"><span class="emoji">🏛️</span>独立广场 + 中央艺术坊逛逛</span></div>
+    <div class="time-row"><span class="time">12:00</span><span class="content"><span class="emoji">🚕</span>退房去机场</span></div>
+    <div class="time-row"><span class="time">14:00→15:00</span><span class="content"><span class="emoji">✈️</span>吉隆坡飞槟城（亚航/飞萤，约¥100+/人）</span></div>
+    <div class="time-row"><span class="time">16:00→</span><span class="content"><span class="emoji">🏨</span>入住乔治市酒店</span></div>
+    <div class="time-row"><span class="time">17:00→</span><span class="content"><span class="emoji">🚶</span>乔治市壁画街打卡 · 姓周桥 · 吃煎蕊、炒粿条 🍜</span></div>
+  </div>
+
+  <!-- Day 4 — 榴莲日 -->
+  <div class="day-card durian">
+    <div class="day-header">
+      <span class="day-title">🍈 Day 4 · 7/6（周一）槟城 · 榴莲日 🏆</span>
+      <span class="badge">⭐ 重头戏</span>
+    </div>
+    <div class="note-box durian" style="margin-top:0;">
+      <div class="title">🍈 7月 = 马来西亚榴莲黄金季！</div>
+      猫山王、黑刺、D24... 树上现摘，吃到饱！
+    </div>
+    <div class="time-row"><span class="time">09:00→15:00</span><span class="content"><span class="emoji">🌳</span><b>浮罗山背榴莲园</b> 🏆 — 榴莲自助餐任吃！¥100~150/人</span></div>
+    <div class="time-row"><span class="time">16:00→18:00</span><span class="content"><span class="emoji">🚡</span>回程路过<b>升旗山</b>坐缆车看全景</span></div>
+    <div class="time-row"><span class="time">晚上</span><span class="content"><span class="emoji">🍜</span>汕头街美食夜市</span></div>
+    <div class="note-box" style="margin-bottom:0;">
+      <div class="title">💡 推荐榴莲园</div>
+      宝盛园(Bao Sheng) 或 阿兴榴莲园 — 提前一天预约即可
+    </div>
+  </div>
+
+  <!-- Day 5 -->
+  <div class="day-card">
+    <div class="day-header">
+      <span class="day-title">📅 Day 5 · 7/7（周二）槟城</span>
+      <span class="badge">🎢 放电日</span>
+    </div>
+    <div class="time-row"><span class="time">09:00→16:00</span><span class="content"><span class="emoji">🎢</span><b>ESCAPE主题乐园</b> — 世界最长滑水道、丛林探险 ⭐</span></div>
+    <div class="time-row"><span class="time">16:30→18:30</span><span class="content"><span class="emoji">🏖️</span><b>Batu Feringghi海滩</b> 踩水看日落</span></div>
+    <div class="time-row"><span class="time">晚上</span><span class="content"><span class="emoji">🦐</span>海鲜大餐</span></div>
+  </div>
+
+  <!-- Day 6 -->
+  <div class="day-card fly">
+    <div class="day-header">
+      <span class="day-title">📅 Day 6 · 7/8（周三）槟城→吉隆坡</span>
+      <span class="badge">✈️ 回吉隆坡</span>
+    </div>
+    <div class="time-row"><span class="time">上午</span><span class="content"><span class="emoji">🛍️</span>买手信（豆沙饼、白咖啡、香料）</span></div>
+    <div class="time-row"><span class="time">中午</span><span class="content"><span class="emoji">✈️</span>飞回吉隆坡</span></div>
+    <div class="time-row"><span class="time">下午→晚上</span><span class="content"><span class="emoji">🛒</span>逛逛Pavilion商场/继续吃榴莲 🍈</span></div>
+  </div>
+
+  <!-- Day 7 -->
+  <div class="day-card">
+    <div class="day-header">
+      <span class="day-title">📅 Day 7 · 7/10（周五）吉隆坡 🗓️</span>
+      <span class="badge">⛰️ 可选日</span>
+    </div>
+    <div class="time-row"><span class="time">白天</span><span class="content"><span class="emoji">⛰️</span><b>云顶高原</b>（缆车+室内游乐场，距吉隆坡1h，当天来回）</span></div>
+    <div class="time-row"><span class="time">或</span><span class="content"><span class="emoji">🏛️</span>国家清真寺+老城区补漏+最后一顿榴莲</span></div>
+    <div class="time-row"><span class="time">晚上</span><span class="content"><span class="emoji">🎯</span>收官晚餐</span></div>
+  </div>
+
+  <!-- Day 8 -->
+  <div class="day-card fly">
+    <div class="day-header">
+      <span class="day-title">📅 Day 8 · 7/11（周六）回程</span>
+      <span class="badge">✈️ 回家</span>
+    </div>
+    <div class="time-row"><span class="time">上午</span><span class="content"><span class="emoji">🛍️</span>退房、机场免税店</span></div>
+    <div class="time-row"><span class="time">14:45→19:10</span><span class="content"><span class="emoji">✈️</span><b>CZ3048 回广州</b>，晚上到家</span></div>
+  </div>
+
+  <!-- Tips Box -->
+  <div class="note-box warn" style="margin-top:20px;">
+    <div class="title">✅ 出行备忘</div>
+    <div>📌 马来西亚 <b>免签</b>（护照有效期需到2026年12月以后）</div>
+    <div>📌 7月吉隆坡 25~33°C，带夏装+薄外套（室内冷气足）</div>
+    <div>📌 槟城榴莲园建议提前半天预约，可包车一日游</div>
+    <div>📌 下载 Grab APP（东南亚滴滴），打车很便宜</div>
+    <div> 📌 带好儿童防晒+驱蚊水</div>
+  </div>
+
+</div>
+
+<div class="footer">
+  ✈️ 7/3 → 7/11 · 吉隆坡+槟城 · 榴莲自由之旅 🍈<br>
+  <span style="font-size:12px; opacity:0.6;">Generated for 小楼一家 · 2026年暑假</span>
+</div>
+
+</body>
+</html>
