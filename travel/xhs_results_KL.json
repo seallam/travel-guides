@@ -1,0 +1,733 @@
+{
+  "meta": {
+    "city": "KL",
+    "keyword": "吉隆坡美食攻略",
+    "engine": "Spider_XHS (execjs签名 + requests + 翻页)",
+    "total_notes": 55,
+    "restaurants_analyzed": 12
+  },
+  "notes": [
+    {
+      "note_id": "",
+      "title": "去吉隆坡之前一定要码住！",
+      "desc": "",
+      "likes": "249",
+      "author": "一只momo",
+      "tags": []
+    },
+    {
+      "note_id": "",
+      "title": "吉隆坡美食纯分享",
+      "desc": "",
+      "likes": "17",
+      "author": "Your lucky",
+      "tags": []
+    },
+    {
+      "note_id": "",
+      "title": "马来西亚吉隆坡宝藏美食大集合！",
+      "desc": "",
+      "likes": "20287",
+      "author": "颜如晶",
+      "tags": []
+    },
+    {
+      "note_id": "",
+      "title": "吉隆坡必吃榜｜外派三年版",
+      "desc": "",
+      "likes": "282",
+      "author": "jophychan",
+      "tags": []
+    },
+    {
+      "note_id": "",
+      "title": "大马自由行｜吃在吉隆坡",
+      "desc": "",
+      "likes": "261",
+      "author": "彩虹啊",
+      "tags": []
+    },
+    {
+      "note_id": "",
+      "title": "吉隆坡4天美食实测🔥附菜品+避雷+推荐指数",
+      "desc": "",
+      "likes": "156",
+      "author": "天选幸运儿",
+      "tags": []
+    },
+    {
+      "note_id": "",
+      "title": "24小时不睡觉在吉隆坡连吃16顿，拿捏",
+      "desc": "",
+      "likes": "19083",
+      "author": "大冬来了",
+      "tags": []
+    },
+    {
+      "note_id": "",
+      "title": "大马去哪吃｜2026米其林推荐🔥KL老字号美食",
+      "desc": "",
+      "likes": "154",
+      "author": "马来西亚去哪嗨",
+      "tags": []
+    },
+    {
+      "note_id": "",
+      "title": "吉隆坡的🔟个道地美食合集🔥收藏起来",
+      "desc": "",
+      "likes": "1537",
+      "author": "爱吃喝玩乐的kaki",
+      "tags": []
+    },
+    {
+      "note_id": "",
+      "title": "🇲🇾听劝！吉隆坡真的不能随便吃",
+      "desc": "",
+      "likes": "600",
+      "author": "Victoria.",
+      "tags": []
+    },
+    {
+      "note_id": "",
+      "title": "人生建议：来吉隆坡吃了这12家再离开‼️",
+      "desc": "",
+      "likes": "1282",
+      "author": "胖胖的墩墩呀",
+      "tags": []
+    },
+    {
+      "note_id": "",
+      "title": "🇲🇾吉隆坡必吃！！！不吃等于白来！！！",
+      "desc": "",
+      "likes": "423",
+      "author": "Song2813",
+      "tags": []
+    },
+    {
+      "note_id": "",
+      "title": "Pudu必吃Top 3宝藏美食！🤤🍜",
+      "desc": "",
+      "likes": "192",
+      "author": "Best Food Malaysia",
+      "tags": []
+    },
+    {
+      "note_id": "",
+      "title": "",
+      "desc": "",
+      "likes": "172",
+      "author": "Kikikiki",
+      "tags": []
+    },
+    {
+      "note_id": "",
+      "title": "🇲🇾吉隆坡本地人爱吃！米其林推荐肉骨茶！",
+      "desc": "",
+      "likes": "205",
+      "author": "Caria",
+      "tags": []
+    },
+    {
+      "note_id": "",
+      "title": "吉隆坡餐厅我只推荐必吃的两家🍴",
+      "desc": "",
+      "likes": "822",
+      "author": "Who car you🥕",
+      "tags": []
+    },
+    {
+      "note_id": "",
+      "title": "J人总结了自己吃过的吉隆坡好饭（合集）",
+      "desc": "",
+      "likes": "2130",
+      "author": "人见人爱甜甜圈",
+      "tags": []
+    },
+    {
+      "note_id": "",
+      "title": "吉隆坡🇲🇾牛逼好吃的10件套。。。",
+      "desc": "",
+      "likes": "2045",
+      "author": "艺琳爱吃甜甜圈",
+      "tags": []
+    },
+    {
+      "note_id": "",
+      "title": "吉隆坡！！一定要去吃的5家店！！🤤🤤",
+      "desc": "",
+      "likes": "2253",
+      "author": "马来西亚美食种草局",
+      "tags": []
+    },
+    {
+      "note_id": "",
+      "title": "",
+      "desc": "",
+      "likes": "311",
+      "author": "徐多钱",
+      "tags": []
+    },
+    {
+      "note_id": "",
+      "title": "已到吉隆坡|有什么不吃死不瞑目的东西吗？",
+      "desc": "",
+      "likes": "278",
+      "author": "小丸子流浪记",
+      "tags": []
+    },
+    {
+      "note_id": "",
+      "title": "🇲🇾吉隆坡最牛逼的9件套…（附地址",
+      "desc": "",
+      "likes": "2300",
+      "author": "坡姐已占用",
+      "tags": []
+    },
+    {
+      "note_id": "",
+      "title": "🇲🇾吉隆坡早市nb好吃的10件套！人均35狂炫！",
+      "desc": "",
+      "likes": "12147",
+      "author": "一颗汤圆崽",
+      "tags": []
+    },
+    {
+      "note_id": "",
+      "title": "吉隆坡美食红黑榜｜好吃不踩雷",
+      "desc": "",
+      "likes": "12",
+      "author": "醒小禾",
+      "tags": []
+    },
+    {
+      "note_id": "",
+      "title": "🇲🇾吉隆坡最牛逼的10件套（附地址📝",
+      "desc": "",
+      "likes": "110",
+      "author": "热气球跑了",
+      "tags": []
+    },
+    {
+      "note_id": "",
+      "title": "🇲🇾极限打卡吉隆坡美食❗️",
+      "desc": "",
+      "likes": "617",
+      "author": "大大",
+      "tags": []
+    },
+    {
+      "note_id": "",
+      "title": "吉隆坡10大必吃🤤",
+      "desc": "",
+      "likes": "525",
+      "author": "吃货Anna",
+      "tags": []
+    },
+    {
+      "note_id": "",
+      "title": "不愧王嘉尔来马来西亚都要吃两次的餐厅！！",
+      "desc": "",
+      "likes": "1251",
+      "author": "Nobody",
+      "tags": []
+    },
+    {
+      "note_id": "",
+      "title": "求问:吉隆坡到底去哪里吃榴莲？",
+      "desc": "",
+      "likes": "129",
+      "author": "猫猫叼糖",
+      "tags": []
+    },
+    {
+      "note_id": "",
+      "title": "连续4年米其林推荐瓦煲饭（大推）",
+      "desc": "",
+      "likes": "566",
+      "author": "Jack爱探食界",
+      "tags": []
+    },
+    {
+      "note_id": "",
+      "title": "吉隆坡48h极限吃了17顿😭（📍附路线店名……）",
+      "desc": "",
+      "likes": "6532",
+      "author": "小鱼噜🍬",
+      "tags": []
+    },
+    {
+      "note_id": "",
+      "title": "",
+      "desc": "",
+      "likes": "10256",
+      "author": "鄭浩南",
+      "tags": []
+    },
+    {
+      "note_id": "",
+      "title": "",
+      "desc": "",
+      "likes": "150",
+      "author": "多管闲事的热心市民",
+      "tags": []
+    },
+    {
+      "note_id": "",
+      "title": "吉隆坡必吃餐厅 五一强推！附菜单",
+      "desc": "",
+      "likes": "111",
+      "author": "夏小于。",
+      "tags": []
+    },
+    {
+      "note_id": "",
+      "title": "马来西亚留子带路！！绝不踩雷美食合集",
+      "desc": "",
+      "likes": "48",
+      "author": "一口吃掉全宇宙",
+      "tags": []
+    },
+    {
+      "note_id": "",
+      "title": "🇲🇾吉隆坡｜在榴莲兄弟品鉴五个品种，大满足",
+      "desc": "",
+      "likes": "227",
+      "author": "一同时光",
+      "tags": []
+    },
+    {
+      "note_id": "",
+      "title": "🇲🇾确实是吉隆坡最牛逼好吃的！！！！！",
+      "desc": "",
+      "likes": "1085",
+      "author": "Jiaaay",
+      "tags": []
+    },
+    {
+      "note_id": "",
+      "title": "",
+      "desc": "",
+      "likes": "194",
+      "author": "海边的柒柒（装修日记）",
+      "tags": []
+    },
+    {
+      "note_id": "",
+      "title": "新年就一定要吃年菜",
+      "desc": "",
+      "likes": "2612",
+      "author": "马来堂哥",
+      "tags": []
+    },
+    {
+      "note_id": "",
+      "title": "吉隆坡美食攻略（本地人推荐不踩雷版）",
+      "desc": "",
+      "likes": "60",
+      "author": "神奇小兔🐰",
+      "tags": []
+    },
+    {
+      "note_id": "",
+      "title": "茨厂街必吃榜 | 百年老字号牛肉面真的惊艳",
+      "desc": "",
+      "likes": "59",
+      "author": "切尔西🎈",
+      "tags": []
+    },
+    {
+      "note_id": "",
+      "title": "",
+      "desc": "",
+      "likes": "314",
+      "author": "陆陆",
+      "tags": []
+    },
+    {
+      "note_id": "",
+      "title": "🇲🇾马来西亚到底有多好吃？6家宝藏美食‼️",
+      "desc": "",
+      "likes": "38136",
+      "author": "三文俞",
+      "tags": []
+    },
+    {
+      "note_id": "",
+      "title": "🇲🇾吉隆坡美食TOP5｜为了吃愿意飞无数次大",
+      "desc": "",
+      "likes": "135",
+      "author": "马来西亚美食种草局",
+      "tags": []
+    },
+    {
+      "note_id": "",
+      "title": "",
+      "desc": "",
+      "likes": "559",
+      "author": "大马吃货Foodie",
+      "tags": []
+    },
+    {
+      "note_id": "",
+      "title": "吉隆坡三天",
+      "desc": "",
+      "likes": "371",
+      "author": "八下",
+      "tags": []
+    },
+    {
+      "note_id": "",
+      "title": "老吃家严选吉隆坡必吃十八件套",
+      "desc": "",
+      "likes": "1983",
+      "author": "麻辣烫不要辣",
+      "tags": []
+    },
+    {
+      "note_id": "",
+      "title": "Sate Kajang｜马来西亚沙爹天花板🍢",
+      "desc": "",
+      "likes": "194",
+      "author": "Chelsea切尔西的日记本",
+      "tags": []
+    },
+    {
+      "note_id": "",
+      "title": "吉隆坡三天两晚｜逛吃攻略它来啦！",
+      "desc": "",
+      "likes": "321",
+      "author": "蓝莓啵啵",
+      "tags": []
+    },
+    {
+      "note_id": "",
+      "title": "沉浸式体验马来西亚牛肉面",
+      "desc": "",
+      "likes": "7063",
+      "author": "瑞哥英语_RyanChen",
+      "tags": []
+    },
+    {
+      "note_id": "",
+      "title": "吉隆坡美食😋人均不到一百吃米其林！",
+      "desc": "",
+      "likes": "39",
+      "author": "人间猕猴桃",
+      "tags": []
+    },
+    {
+      "note_id": "",
+      "title": "",
+      "desc": "",
+      "likes": "1546",
+      "author": "可妮带你吃喝玩乐",
+      "tags": []
+    },
+    {
+      "note_id": "",
+      "title": "🇲🇾阿罗街｜Eason&五月天同款～",
+      "desc": "",
+      "likes": "521",
+      "author": "聂云喜",
+      "tags": []
+    },
+    {
+      "note_id": "",
+      "title": "🇲🇾吉隆坡那些好吃的老字号1️⃣",
+      "desc": "",
+      "likes": "75",
+      "author": "小鱼噜🍬",
+      "tags": []
+    },
+    {
+      "note_id": "",
+      "title": "来马追星吗？ 我说的是米其林的“🌟”",
+      "desc": "",
+      "likes": "287",
+      "author": "Tune Talk",
+      "tags": []
+    }
+  ],
+  "cuisine_trending": {
+    "肉骨茶": 2,
+    "米其林": 2,
+    "榴莲": 1,
+    "沙爹": 1,
+    "夜市": 1
+  },
+  "restaurant_rankings": [
+    {
+      "rank": 1,
+      "name": "丽丰茶冰室",
+      "area": "中央艺术坊",
+      "best_for_meal": "breakfast",
+      "recommended_dishes": [
+        "牛肉面⭐",
+        "咖喱叻沙",
+        "冰咖啡"
+      ],
+      "coordinate": [
+        3.143,
+        101.6955
+      ],
+      "keyword_matches": 2,
+      "matched_titles": [
+        "茨厂街必吃榜 | 百年老字号牛肉面真的惊艳",
+        "沉浸式体验马来西亚牛肉面"
+      ]
+    },
+    {
+      "rank": 2,
+      "name": "Durian BB学院",
+      "area": "SS2",
+      "best_for_meal": "snack",
+      "recommended_dishes": [
+        "猫山王⭐",
+        "黑刺",
+        "D24"
+      ],
+      "coordinate": [
+        3.118,
+        101.625
+      ],
+      "keyword_matches": 2,
+      "matched_titles": [
+        "求问:吉隆坡到底去哪里吃榴莲？",
+        "🇲🇾吉隆坡｜在榴莲兄弟品鉴五个品种，大满足"
+      ]
+    },
+    {
+      "rank": 3,
+      "name": "新峰肉骨茶",
+      "area": "茨厂街",
+      "best_for_meal": "lunch",
+      "recommended_dishes": [
+        "干肉骨茶⭐",
+        "湿肉骨茶",
+        "油条",
+        "榴莲沙冰"
+      ],
+      "coordinate": [
+        3.1445,
+        101.696
+      ],
+      "keyword_matches": 1,
+      "matched_titles": [
+        "🇲🇾吉隆坡本地人爱吃！米其林推荐肉骨茶！"
+      ]
+    },
+    {
+      "rank": 4,
+      "name": "黄亚华烧鸡翅",
+      "area": "阿罗街",
+      "best_for_meal": "dinner",
+      "recommended_dishes": [
+        "炭烤鸡翅⭐",
+        "沙爹串",
+        "烤魔鬼鱼"
+      ],
+      "coordinate": [
+        3.144,
+        101.707
+      ],
+      "keyword_matches": 1,
+      "matched_titles": [
+        "🇲🇾阿罗街｜Eason&五月天同款～"
+      ]
+    },
+    {
+      "rank": 5,
+      "name": "肥肥蟹",
+      "area": "Pavilion 8F",
+      "best_for_meal": "dinner",
+      "recommended_dishes": [
+        "咸蛋黄无壳蟹⭐",
+        "甘香奶油蟹",
+        "炸馒头"
+      ],
+      "coordinate": [
+        3.1485,
+        101.714
+      ],
+      "keyword_matches": 0,
+      "matched_titles": []
+    },
+    {
+      "rank": 6,
+      "name": "关夫人 Madam Kwan's",
+      "area": "KLCC 4F",
+      "best_for_meal": "lunch",
+      "recommended_dishes": [
+        "椰浆饭⭐",
+        "叻沙",
+        "三色饭"
+      ],
+      "coordinate": [
+        3.1575,
+        101.7132
+      ],
+      "keyword_matches": 0,
+      "matched_titles": []
+    },
+    {
+      "rank": 7,
+      "name": "华阳茶室",
+      "area": "武吉免登",
+      "best_for_meal": "breakfast",
+      "recommended_dishes": [
+        "酥皮蛋挞🥇",
+        "咖椰面包",
+        "椰浆鸡腿饭",
+        "白咖啡"
+      ],
+      "coordinate": [
+        3.1495,
+        101.7142
+      ],
+      "keyword_matches": 0,
+      "matched_titles": []
+    },
+    {
+      "rank": 8,
+      "name": "金莲记",
+      "area": "茨厂街",
+      "best_for_meal": "lunch",
+      "recommended_dishes": [
+        "福建黑炒面⭐",
+        "月光河粉"
+      ],
+      "coordinate": [
+        3.1435,
+        101.6965
+      ],
+      "keyword_matches": 0,
+      "matched_titles": []
+    },
+    {
+      "rank": 9,
+      "name": "Little Penang Cafe",
+      "area": "KLCC 4F",
+      "best_for_meal": "lunch",
+      "recommended_dishes": [
+        "炒粿条⭐",
+        "煎蕊",
+        "虾面"
+      ],
+      "coordinate": [
+        3.1575,
+        101.713
+      ],
+      "keyword_matches": 0,
+      "matched_titles": []
+    },
+    {
+      "rank": 10,
+      "name": "明记烧鱼",
+      "area": "阿罗街",
+      "best_for_meal": "dinner",
+      "recommended_dishes": [
+        "魔鬼鱼⭐",
+        "金鲳鱼"
+      ],
+      "coordinate": [
+        3.144,
+        101.707
+      ],
+      "keyword_matches": 0,
+      "matched_titles": []
+    },
+    {
+      "rank": 11,
+      "name": "鼎泰丰",
+      "area": "KLCC 4F",
+      "best_for_meal": "lunch",
+      "recommended_dishes": [
+        "小笼包⭐",
+        "蛋炒饭",
+        "酸辣汤"
+      ],
+      "coordinate": [
+        3.1575,
+        101.7133
+      ],
+      "keyword_matches": 0,
+      "matched_titles": []
+    },
+    {
+      "rank": 12,
+      "name": "Village Park",
+      "area": "白沙罗",
+      "best_for_meal": "lunch",
+      "recommended_dishes": [
+        "椰浆鸡腿饭⭐"
+      ],
+      "coordinate": [
+        3.12,
+        101.635
+      ],
+      "keyword_matches": 0,
+      "matched_titles": []
+    }
+  ],
+  "day_plans": {
+    "Day1_7_24": {
+      "theme": "抵达 · 阿罗街夜市",
+      "14:30_下午茶": {
+        "name": "新峰肉骨茶",
+        "dishes": [
+          "干肉骨茶⭐",
+          "湿肉骨茶",
+          "油条",
+          "榴莲沙冰"
+        ]
+      },
+      "18:30_晚餐": {
+        "name": "黄亚华烧鸡翅",
+        "dishes": [
+          "炭烤鸡翅⭐",
+          "沙爹串",
+          "烤魔鬼鱼"
+        ]
+      }
+    },
+    "Day2_7_25": {
+      "theme": "亲子日 · KLCC + 黑风洞",
+      "08:00_早餐": {
+        "name": "丽丰茶冰室",
+        "dishes": [
+          "牛肉面⭐",
+          "咖喱叻沙",
+          "冰咖啡"
+        ]
+      },
+      "12:00_午餐": {
+        "name": "新峰肉骨茶",
+        "dishes": [
+          "干肉骨茶⭐",
+          "湿肉骨茶",
+          "油条",
+          "榴莲沙冰"
+        ]
+      },
+      "18:30_晚餐": {
+        "name": "肥肥蟹",
+        "dishes": [
+          "咸蛋黄无壳蟹⭐",
+          "甘香奶油蟹",
+          "炸馒头"
+        ]
+      }
+    },
+    "Day3_7_26": {
+      "theme": "转场槟城 · 茨厂街",
+      "09:00_早午餐": {
+        "name": "关夫人 Madam Kwan's",
+        "dishes": [
+          "椰浆饭⭐",
+          "叻沙",
+          "三色饭"
+        ]
+      }
+    }
+  }
+}
