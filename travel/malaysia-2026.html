@@ -250,6 +250,93 @@ body {
     </div>
   </div>
 
+<!-- 地图 -->
+  <div class="map-section">
+    <button class="map-toggle" onclick="toggleMap()">🗺️ KLCC美食地图 <span id="map-arrow">▶</span></button>
+    <div id="map-container" class="map-collapsed">
+      <div id="klcc-map" style="height:400px; border-radius:12px;"></div>
+      <div style="font-size:12px; color:#999; padding:6px 0; text-align:center;">
+        🔴 景点 · 🟢 美食推荐
+      </div>
+    </div>
+  </div>
+
+  <style>
+  .map-toggle {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 12px 16px;
+    width: 100%; cursor: pointer;
+    font-size: 15px; font-weight: 600; color: #2d6a9f;
+    text-align: left;
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 8px; transition: all 0.2s;
+  }
+  .map-toggle:hover { background: #eef6fb; }
+  #map-container { overflow: hidden; transition: max-height 0.4s ease; max-height: 0; }
+  #map-container.map-expanded { max-height: 500px; }
+  #map-container.map-collapsed { max-height: 0; }
+  .map-section { margin-top: 20px; }
+  </style>
+  <script>
+  function toggleMap() {
+    var c = document.getElementById('map-container');
+    var a = document.getElementById('map-arrow');
+    var e = c.classList.contains('map-expanded');
+    if (!e && !window.mapLoaded) { loadMap(); }
+    c.classList.toggle('map-expanded');
+    c.classList.toggle('map-collapsed');
+    a.textContent = e ? '▶' : '▼';
+  }
+  function loadMap() {
+    if (window.mapLoaded) return;
+    window.mapLoaded = true;
+    var s = document.createElement('link');
+    s.rel = 'stylesheet'; s.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+    document.head.appendChild(s);
+    var j = document.createElement('script');
+    j.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+    j.onload = function(){
+      var map = L.map('klcc-map').setView([3.148, 101.705], 14);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenSM', maxZoom: 19
+      }).addTo(map);
+
+      var fi = function(e) {
+        return L.divIcon({className: '', html: e, iconSize: [24,24]});
+      };
+
+      // 景点
+      L.marker([3.1560, 101.7110]).addTo(map).bindPopup('<b>🏨 皇冠丽晶</b>');
+      L.marker([3.1575, 101.7135]).addTo(map).bindPopup('<b>🧪 Petrosains</b><br>KLCC 4F');
+      L.marker([3.1528, 101.7130]).addTo(map).bindPopup('<b>🐟 Aquaria KLCC</b>');
+      L.marker([3.1440, 101.7070]).addTo(map).bindPopup('<b>🍜 阿罗街夜市</b>');
+      L.marker([3.1488, 101.6945]).addTo(map).bindPopup('<b>🏛️ 独立广场</b>');
+      L.marker([3.1420, 101.6950]).addTo(map).bindPopup('<b>🏺 中央艺术坊</b>');
+
+      // 美食
+      L.marker([3.1575, 101.7132], {icon: fi('🍛')})
+        .addTo(map).bindPopup('<b>关夫人</b><br>KLCC 4F · 椰浆饭/叻沙');
+      L.marker([3.1575, 101.7130], {icon: fi('🥟')})
+        .addTo(map).bindPopup('<b>Little Penang</b><br>KLCC 4F · 炒粿条');
+      L.marker([3.1495, 101.7142], {icon: fi('☕')})
+        .addTo(map).bindPopup('<b>华阳茶室</b><br>蛋挞/咖椰包/椰浆饭');
+      L.marker([3.1485, 101.7140], {icon: fi('🦀')})
+        .addTo(map).bindPopup('<b>肥肥蟹</b><br>Pavilion 8F · 咸蛋黄蟹');
+      L.marker([3.1445, 101.6960], {icon: fi('🫖')})
+        .addTo(map).bindPopup('<b>新峰肉骨茶</b><br>茨厂街');
+      L.marker([3.1435, 101.6965], {icon: fi('🍝')})
+        .addTo(map).bindPopup('<b>金莲记</b><br>茨厂街 · 福建炒面');
+      L.marker([3.1430, 101.6955], {icon: fi('🍚')})
+        .addTo(map).bindPopup('<b>丽丰茶冰室</b><br>牛肉面/咖喱叻沙');
+
+      map.invalidateSize();
+    };
+    document.body.appendChild(j);
+  }
+  </script>
+
   <!-- Day 2 · 7/25 吉隆坡亲子 · 美食版 -->
   <div class="day-card">
     <div class="day-header">
