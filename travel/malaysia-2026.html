@@ -21,15 +21,7 @@ body {
   position: relative;
   overflow: hidden;
 }
-.header::after {
-  content: "✈️ 🍈 🌴";
-  position: absolute;
-  font-size: 80px;
-  opacity: 0.08;
-  right: -10px;
-  bottom: -10px;
-  transform: rotate(-15deg);
-}
+.header::after { content: "✈️ 🍈 🌴"; position: absolute; font-size: 80px; opacity: 0.08; right: -10px; bottom: -10px; transform: rotate(-15deg); }
 .header h1 { font-size: 28px; margin-bottom: 6px; letter-spacing: 2px; }
 .header .subtitle { font-size: 15px; opacity: 0.85; }
 .header .flight-info {
@@ -39,6 +31,61 @@ body {
   padding: 8px 20px;
   border-radius: 20px;
   font-size: 14px;
+}
+.container { max-width: 700px; margin: 0 auto; padding: 0 15px; }
+.city-card {
+  background: white;
+  border-radius: 14px;
+  padding: 0;
+  margin-bottom: 16px;
+  box-shadow: 0 1px 8px rgba(0,0,0,0.05);
+  overflow: hidden;
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s;
+  border-left: 4px solid #3c8dbc;
+}
+.city-card:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
+.city-card .banner {
+  padding: 24px 20px 16px;
+  color: white;
+  position: relative;
+}
+.city-card .banner.kl { background: linear-gradient(135deg, #2d6a9f, #3c8dbc); }
+.city-card .banner.penang { background: linear-gradient(135deg, #6b8c42, #8cb45c); }
+.city-card .banner.langkawi { background: linear-gradient(135deg, #8e6baf, #b08cd4); }
+.city-card .banner h2 { font-size: 22px; margin-bottom: 4px; }
+.city-card .banner .badge {
+  display: inline-block;
+  font-size: 11px;
+  background: rgba(255,255,255,0.2);
+  padding: 2px 10px;
+  border-radius: 10px;
+  margin-top: 6px;
+}
+.city-card .banner .days {
+  font-size: 13px;
+  opacity: 0.85;
+  margin-top: 4px;
+}
+.city-card .preview {
+  padding: 14px 20px;
+  font-size: 14px;
+  color: #555;
+}
+.city-card .preview .highlights {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 8px;
+  margin-top: 6px;
+}
+.city-card .preview .highlights span {
+  font-size: 12px;
+  background: #eef6fb;
+  padding: 2px 10px;
+  border-radius: 8px;
+  color: #2d6a9f;
 }
 .summary-bar {
   background: white;
@@ -57,58 +104,6 @@ body {
 .summary-bar .item { flex: 1; min-width: 100px; }
 .summary-bar .num { font-size: 22px; font-weight: 700; color: #2d6a9f; }
 .summary-bar .label { font-size: 12px; color: #888; }
-.container { max-width: 700px; margin: 0 auto; padding: 0 15px; }
-.day-card {
-  background: white;
-  border-radius: 14px;
-  padding: 20px;
-  margin-bottom: 14px;
-  box-shadow: 0 1px 8px rgba(0,0,0,0.05);
-  border-left: 4px solid #3c8dbc;
-}
-.day-card.highlight { border-left-color: #e8a838; background: #fffbf0; }
-.day-card.durian { border-left-color: #6b8c42; background: #f4f8ee; }
-.day-card.fly { border-left-color: #8e6baf; background: #f5f0f8; }
-.day-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  margin-bottom: 10px;
-  flex-wrap: wrap;
-  gap: 4px;
-}
-.day-header .date {
-  font-size: 13px;
-  color: #999;
-}
-.day-header .badge {
-  font-size: 11px;
-  background: #3c8dbc;
-  color: white;
-  padding: 2px 10px;
-  border-radius: 10px;
-}
-.day-card.highlight .badge { background: #e8a838; }
-.day-card.durian .badge { background: #6b8c42; }
-.day-card.fly .badge { background: #8e6baf; }
-.day-title { font-size: 17px; font-weight: 700; }
-.time-row {
-  display: flex;
-  gap: 10px;
-  padding: 6px 0;
-  border-bottom: 1px dashed #eee;
-  align-items: baseline;
-}
-.time-row:last-child { border-bottom: none; }
-.time-row .time {
-  font-size: 13px;
-  font-weight: 600;
-  color: #3c8dbc;
-  min-width: 75px;
-  flex-shrink: 0;
-}
-.time-row .content { font-size: 14px; }
-.time-row .content .emoji { margin-right: 4px; }
 .note-box {
   background: #eef6fb;
   border-radius: 10px;
@@ -117,49 +112,23 @@ body {
   font-size: 14px;
   line-height: 1.6;
 }
-.note-box.durian { background: #edf3e4; }
-.note-box.warn { background: #fff6e0; }
-.note-box.food { background: #fef9ef; border-left: 3px solid #e8a838; }
 .note-box .title { font-weight: 700; margin-bottom: 4px; }
-.note-box .sub { font-size: 13px; color: #666; margin-top: 2px; }
-.food-grid {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 3px 10px;
-  font-size: 14px;
-  margin-top: 8px;
-}
-.food-grid .name { font-weight: 600; color: #2d6a9f; }
-.food-grid .detail { color: #444; }
-.food-grid .divider { grid-column: 1 / -1; border-bottom: 1px dashed #e8dcc8; margin: 2px 0; }
-.tag {
-  display: inline-block;
-  font-size: 11px;
-  padding: 2px 8px;
-  border-radius: 8px;
-  margin-right: 4px;
-}
-.tag-green { background: #e0f0d0; color: #3a6b1a; }
-.tag-orange { background: #fdebd0; color: #a0670a; }
-.tag-blue { background: #d6eaf8; color: #1a5276; }
-.tag-purple { background: #e8daf5; color: #5b2c8a; }
-.tag-red { background: #fde0e0; color: #a02020; }
+.note-box a { color: #2d6a9f; }
 .footer {
   text-align: center;
   padding: 30px 20px;
   font-size: 13px;
   color: #999;
 }
-.emoji-lg { font-size: 20px; }
-@media (max-width: 480px) {
-  .header h1 { font-size: 24px; }
-  .summary-bar { margin: -10px 10px 16px; padding: 14px; }
-  .day-card { padding: 16px; }
-  .time-row .time { min-width: 65px; font-size: 12px; }
-  .time-row .content { font-size: 13px; }
-  .food-grid { grid-template-columns: 1fr; gap: 0; }
-  .food-grid .name { font-size: 13px; }
-  .food-grid .detail { font-size: 12px; margin-bottom: 4px; }
+.rate-bar {
+  text-align: center;
+  font-size: 13px;
+  color: #888;
+  padding: 8px;
+  background: white;
+  border-radius: 10px;
+  margin: -10px 15px 14px;
+  border: 1px solid #eee;
 }
 </style>
 </head>
@@ -175,12 +144,12 @@ body {
 
 <div class="summary-bar">
   <div class="item">
-    <div class="num">7/24→8/1</div>
-    <div class="label">📅 出行日期</div>
+    <div class="num">9天8晚</div>
+    <div class="label">📅 行程天数</div>
   </div>
   <div class="item">
-    <div class="num">¥11,091</div>
-    <div class="label">💰 已支出</div>
+    <div class="num">3城</div>
+    <div class="label">🏙️ 吉隆坡·槟城·兰卡威</div>
   </div>
   <div class="item">
     <div class="num">🍈</div>
@@ -188,440 +157,78 @@ body {
   </div>
 </div>
 
-<!-- 导航 -->
-<div style="max-width:700px; margin:0 auto; padding:0 15px;">
-<details style="margin-bottom:10px;">
-  <summary style="cursor:pointer; background:white; padding:10px 16px; border-radius:10px; border:1px solid #eee; font-size:14px; font-weight:600; color:#2d6a9f;">📋 跳转日程 ▾</summary>
-  <div style="background:white; border-radius:0 0 10px 10px; padding:8px 16px; border:1px solid #eee; border-top:0; display:flex; flex-wrap:wrap; gap:4px;">
-    <a href="#day1" style="font-size:13px; color:#2d6a9f; text-decoration:none; padding:4px 10px; background:#eef6fb; border-radius:6px;">Day1·抵达·美食</a>
-    <a href="#day2" style="font-size:13px; color:#2d6a9f; text-decoration:none; padding:4px 10px; background:#eef6fb; border-radius:6px;">Day2·亲子·美食</a>
-    <a href="#day3" style="font-size:13px; color:#2d6a9f; text-decoration:none; padding:4px 10px; background:#eef6fb; border-radius:6px;">Day3·槟城</a>
-    <a href="#day4" style="font-size:13px; color:#2d6a9f; text-decoration:none; padding:4px 10px; background:#eef6fb; border-radius:6px;">Day4·榴莲日</a>
-    <a href="#day5" style="font-size:13px; color:#2d6a9f; text-decoration:none; padding:4px 10px; background:#eef6fb; border-radius:6px;">Day5·ESCAPE</a>
-    <a href="#day6" style="font-size:13px; color:#2d6a9f; text-decoration:none; padding:4px 10px; background:#eef6fb; border-radius:6px;">Day6·兰卡威</a>
-    <a href="#day7" style="font-size:13px; color:#2d6a9f; text-decoration:none; padding:4px 10px; background:#eef6fb; border-radius:6px;">Day7·兰卡威</a>
-    <a href="#day8" style="font-size:13px; color:#2d6a9f; text-decoration:none; padding:4px 10px; background:#eef6fb; border-radius:6px;">Day8·回KL</a>
-    <a href="#day9" style="font-size:13px; color:#2d6a9f; text-decoration:none; padding:4px 10px; background:#eef6fb; border-radius:6px;">Day9·回程</a>
-    <a href="#budget" style="font-size:13px; color:#2d6a9f; text-decoration:none; padding:4px 10px; background:#eef6fb; border-radius:6px;">💰预算</a>
-    <a href="#food-overview" style="font-size:13px; color:#e8a838; text-decoration:none; padding:4px 10px; background:#fef9ef; border-radius:6px;">🍽️美食总览</a>
-  </div>
-</details>
-</div>
-
 <div class="container">
 
-  <!-- Day 1 · 7/24 抵达吉隆坡 · 美食版 -->
-  <div class="day-card fly">
-    <div class="day-header">
-      <span class="day-title" id="day1">📅 Day 1 · 7/24（周五）抵达吉隆坡</span>
-      <span class="badge">✈️ 飞行日 &nbsp;🍽️ 阿罗街</span>
-    </div>
-    <div class="day-header"><span class="date">08:30 → 12:45 · CZ349 · 52D·52E·52G ✅</span></div>
-    <div class="time-row"><span class="time">08:30→12:45</span><span class="content"><span class="emoji">✈️</span>广州飞吉隆坡，南航有餐食</span></div>
-    <div class="time-row"><span class="time">13:00→</span><span class="content"><span class="emoji">🚕</span>Grab到酒店（KLIA→KLCC ≈¥60~80，45min）</span></div>
-    <div class="time-row"><span class="time">14:00</span><span class="content"><span class="emoji">🏨</span><b>皇冠丽晶服务套房酒店</b> — No.12 Jalan P. Ramlee（¥816/2晚含税）</span></div>
-    <div class="time-row"><span class="time">14:30→</span><span class="content"><span class="emoji">🍽️</span><b>关夫人 Madam Kwan's</b> 下午茶/午餐（KLCC Suria 4F）<span class="tag tag-orange">小红书热门</span></div>
-    <div class="time-row"><span class="time">15:30→</span><span class="content"><span class="emoji">🗼</span>双子塔KLCC公园溜达 + 拍照经典机位</span></div>
-    <div class="time-row"><span class="time">18:30→</span><span class="content"><span class="emoji">🍜</span><b>阿罗街夜市</b>（步行10分钟）— 详见下方美食攻略</span></div>
+  <!-- 汇率 -->
+  <div class="rate-bar" id="rate-display">💱 加载实时汇率中...</div>
 
-    <!-- Day1 美食攻略 -->
-    <div class="note-box food" style="margin-bottom:0;">
-      <div class="title">🍽️ 阿罗街夜市 · 吃什么</div>
-      <div class="sub">📍 从酒店步行10分钟 | ⏰ 18:00~深夜 | 💰 人均RM30~60</div>
-      <div class="food-grid">
-        <div class="name">🔥 黄亚华烧鸡翅</div>
-        <div class="detail">阿罗街头号招牌！炭火慢烤，皮脆肉嫩，刷秘制蜜糖酱。必点！<span class="tag tag-red">五月天打卡</span></div>
-        <div class="divider"></div>
-        <div class="name">🐟 明记烧鱼</div>
-        <div class="detail">魔鬼鱼/金鲳鱼用香蕉叶包裹烧制，蘸酸甜辣酱。孩子也能吃。</div>
-        <div class="divider"></div>
-        <div class="name">🍢 沙爹串 Satay</div>
-        <div class="detail">牛肉/鸡肉串配花生酱蘸料，香茅味浓郁，小朋友最爱。<span class="tag tag-green">儿童友好</span></div>
-        <div class="divider"></div>
-        <div class="name">🥟 炸云吞/春卷</div>
-        <div class="detail">路边摊现炸，金黄酥脆，孩子当零食吃</div>
-        <div class="divider"></div>
-        <div class="name">🍈 第一口榴莲</div>
-        <div class="detail">阿罗街水果摊有开好的猫山王，RM25~40/盒。先小试！<span class="tag tag-orange">D24入门</span></div>
-        <div class="divider"></div>
-        <div class="name">🥤 椰青/甘蔗汁</div>
-        <div class="detail">人手一个椰青解暑，甘蔗汁加冰超爽</div>
+  <!-- KL -->
+  <a class="city-card" href="kl.html">
+    <div class="banner kl">
+      <h2>🗼 吉隆坡 Kuala Lumpur</h2>
+      <div class="days">Day 1-3 · 7/24(周五) → 7/26(周日)</div>
+      <span class="badge">🏨 皇冠丽晶</span>
+    </div>
+    <div class="preview">
+      双子塔 · Petrosains科学馆 · Aquaria水族馆 · 黑风洞 · 阿罗街夜市 🍜
+      <div class="highlights">
+        <span>🍜 阿罗街夜市</span>
+        <span>🧪 Petrosains</span>
+        <span>🐟 Aquaria</span>
+        <span>🐒 黑风洞</span>
+        <span>🍈 武吉免登榴莲</span>
       </div>
     </div>
-  </div>
+  </a>
 
-<!-- 地图 -->
-  <div class="map-section">
-    <button class="map-toggle" onclick="toggleMap()">🗺️ KLCC美食地图 <span id="map-arrow">▶</span></button>
-    <div id="map-container" class="map-collapsed">
-      <div id="klcc-map" style="height:400px; border-radius:12px;"></div>
-      <div style="font-size:12px; color:#999; padding:6px 0; text-align:center;">
-        🔴 景点 · 🟢 美食推荐
+  <!-- Penang -->
+  <a class="city-card" href="penang.html">
+    <div class="banner penang">
+      <h2>🍜 槟城 Penang</h2>
+      <div class="days">Day 4-5 · 7/27(周一) → 7/28(周二)</div>
+      <span class="badge">🎢 榴莲日 + ESCAPE</span>
+    </div>
+    <div class="preview">
+      浮罗山背榴莲园 🏆 · 升旗山 · 汕头街夜市 · ESCAPE主题乐园 · Batu Feringghi海滩
+      <div class="highlights">
+        <span>🍈 榴莲自助任吃</span>
+        <span>🚡 升旗山缆车</span>
+        <span>🎢 最长滑水道</span>
+        <span>🏖️ 海滩日落</span>
       </div>
     </div>
-  </div>
+  </a>
 
-  <style>
-  .map-toggle {
-    background: white;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 12px 16px;
-    width: 100%; cursor: pointer;
-    font-size: 15px; font-weight: 600; color: #2d6a9f;
-    text-align: left;
-    display: flex; justify-content: space-between; align-items: center;
-    margin-bottom: 8px; transition: all 0.2s;
-  }
-  .map-toggle:hover { background: #eef6fb; }
-  #map-container { overflow: hidden; transition: max-height 0.4s ease; max-height: 0; }
-  #map-container.map-expanded { max-height: 500px; }
-  #map-container.map-collapsed { max-height: 0; }
-  .map-section { margin-top: 20px; }
-  </style>
-  <script>
-  function toggleMap() {
-    var c = document.getElementById('map-container');
-    var a = document.getElementById('map-arrow');
-    var e = c.classList.contains('map-expanded');
-    if (!e && !window.mapLoaded) { loadMap(); }
-    c.classList.toggle('map-expanded');
-    c.classList.toggle('map-collapsed');
-    a.textContent = e ? '▶' : '▼';
-  }
-  function loadMap() {
-    if (window.mapLoaded) return;
-    window.mapLoaded = true;
-    var s = document.createElement('link');
-    s.rel = 'stylesheet'; s.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
-    document.head.appendChild(s);
-    var j = document.createElement('script');
-    j.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
-    j.onload = function(){
-      var map = L.map('klcc-map').setView([3.148, 101.705], 13);
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; OpenSM', maxZoom: 19
-      }).addTo(map);
-
-      var fi = function(e) {
-        return L.divIcon({className: '', html: e, iconSize: [24,24]});
-      };
-
-      // 景点
-      L.marker([3.1560, 101.7110]).addTo(map).bindPopup('<b>🏨 皇冠丽晶</b>');
-      L.marker([3.1575, 101.7135]).addTo(map).bindPopup('<b>🧪 Petrosains</b><br>KLCC 4F');
-      L.marker([3.1528, 101.7130]).addTo(map).bindPopup('<b>🐟 Aquaria KLCC</b>');
-      L.marker([3.1440, 101.7070]).addTo(map).bindPopup('<b>🍜 阿罗街夜市</b>');
-      L.marker([3.1488, 101.6945]).addTo(map).bindPopup('<b>🏛️ 独立广场</b>');
-      L.marker([3.1420, 101.6950]).addTo(map).bindPopup('<b>🏺 中央艺术坊</b>');
-      L.marker([3.1435, 101.6965]).addTo(map).bindPopup('<b>🏮 茨厂街</b>');
-      L.marker([3.2368, 101.6839]).addTo(map).bindPopup('<b>🐒 黑风洞</b><br>272级彩色阶梯');
-      L.marker([2.9353, 101.6928]).addTo(map).bindPopup('<b>🕌 粉色清真寺</b><br>Putrajaya');
-
-      // 美食
-      L.marker([3.1575, 101.7132], {icon: fi('🍛')})
-        .addTo(map).bindPopup('<b>关夫人</b><br>KLCC 4F · 椰浆饭/叻沙');
-      L.marker([3.1575, 101.7130], {icon: fi('🥟')})
-        .addTo(map).bindPopup('<b>Little Penang</b><br>KLCC 4F · 炒粿条');
-      L.marker([3.1495, 101.7142], {icon: fi('☕')})
-        .addTo(map).bindPopup('<b>华阳茶室</b><br>蛋挞/咖椰包/椰浆饭');
-      L.marker([3.1485, 101.7140], {icon: fi('🦀')})
-        .addTo(map).bindPopup('<b>肥肥蟹</b><br>Pavilion 8F · 咸蛋黄蟹');
-      L.marker([3.1445, 101.6960], {icon: fi('🫖')})
-        .addTo(map).bindPopup('<b>新峰肉骨茶</b><br>茨厂街');
-      L.marker([3.1435, 101.6965], {icon: fi('🍝')})
-        .addTo(map).bindPopup('<b>金莲记</b><br>茨厂街 · 福建炒面');
-      L.marker([3.1430, 101.6955], {icon: fi('🍚')})
-        .addTo(map).bindPopup('<b>丽丰茶冰室</b><br>牛肉面/咖喱叻沙');
-
-      // 榴莲 🍈
-      L.marker([3.1460, 101.7130], {icon: fi('🍈')})
-        .addTo(map).bindPopup('<b>榴莲王 Durian Man</b><br>武吉免登·市区最方便');
-      L.marker([3.1170, 101.6240], {icon: fi('🍈')})
-        .addTo(map).bindPopup('<b>Durian BB学院</b><br>SS2·榴莲自助RM68');
-      L.marker([3.0870, 101.6880], {icon: fi('🍈')})
-        .addTo(map).bindPopup('<b>NSK Grocer</b><br>超市榴莲·RM8起');
-
-      map.invalidateSize();
-    };
-    document.body.appendChild(j);
-  }
-  </script>
-
-  <!-- Day 2 · 7/25 吉隆坡亲子 · 美食版 -->
-  <div class="day-card">
-    <div class="day-header">
-      <span class="day-title" id="day2">📅 Day 2 · 7/25（周六）吉隆坡</span>
-      <span class="badge">🎯 亲子日 &nbsp;🍽️ 全天美食</span>
+  <!-- Langkawi -->
+  <a class="city-card" href="langkawi.html">
+    <div class="banner langkawi">
+      <h2>⛵ 兰卡威 Langkawi</h2>
+      <div class="days">Day 6-9 · 7/29(周三) → 8/1(周六)</div>
+      <span class="badge">🏝️ 海岛游</span>
     </div>
-    <div class="time-row"><span class="time">08:00→08:30</span><span class="content"><span class="emoji">🍽️</span><b>华阳茶室 Oriental Kopi</b> 吃早餐 — 酥皮蛋挞+咖椰烤面包+咖啡 ☕</span></div>
-    <div class="time-row"><span class="time">09:00→12:00</span><span class="content"><span class="emoji">🧪</span><b>Petrosains科学馆</b> — 8岁娃进去出不来，互动体验超多 ⭐</span></div>
-    <div class="time-row"><span class="time">12:00→13:00</span><span class="content"><span class="emoji">🍽️</span><b>Madam Kwan's / Little Penang</b> 午餐（KLCC Suria 4F）— 看下方推荐</span></div>
-    <div class="time-row"><span class="time">13:30→15:30</span><span class="content"><span class="emoji">🐟</span><b>Aquaria KLCC水族馆</b> — 海底隧道看鲨鱼</span></div>
-    <div class="time-row"><span class="time">16:00→17:30</span><span class="content"><span class="emoji">🐒</span><b>黑风洞</b> — 272级彩色阶梯（Grab≈RM25，25min）</span></div>
-    <div class="time-row"><span class="time">18:30→</span><span class="content"><span class="emoji">🦀</span><b>肥肥蟹 / 关夫人</b> 晚餐（详见下方推荐）</span></div>
-    <div class="time-row"><span class="time">晚上</span><span class="content"><span class="emoji">🏊</span>酒店泳池玩水</span></div>
-
-    <!-- Day2 午餐攻略 -->
-    <div class="note-box food">
-      <div class="title">🍽️ KLCC Suria 午餐推荐</div>
-      <div class="sub">📍 双子塔购物中心4层 | ⏰ 12:00~13:00 | 从Petrosains步行2分钟</div>
-      <div class="food-grid">
-        <div class="name">⭐ Madam Kwan's</div>
-        <div class="detail">椰浆饭(Nasi Lemak)全城知名，叻沙(Laksa)汤底浓郁，炒粿条锅气足。孩子可选炸鸡翅+薯条。<span class="tag tag-orange">小红书热门</span></div>
-        <div class="divider"></div>
-        <div class="name">🥟 Little Penang Cafe</div>
-        <div class="detail">槟城炒粿条(Char Koay Teow)、煎蕊(Cendol)甜品、虾面。味道正宗，性价比高。<span class="tag tag-green">儿童友好</span></div>
-        <div class="divider"></div>
-        <div class="name">🥟 鼎泰丰 Din Tai Fung</div>
-        <div class="detail">小笼包、蛋炒饭、酸辣汤。孩子100%爱吃，不踩雷，空调足。</div>
+    <div class="preview">
+      珍南海滩 · 天空之桥 · 游艇落日巡航 · 最后一顿榴莲 · 回广州 🏡
+      <div class="highlights">
+        <span>🌉 天空之桥</span>
+        <span>⛵ 落日巡航</span>
+        <span>🏖️ 珍南海滩</span>
+        <span>🍈 最后一榴</span>
       </div>
     </div>
+  </a>
 
-    <!-- Day2 晚餐攻略 -->
-    <div class="note-box food" style="margin-bottom:0;">
-      <div class="title">🍽️ 晚餐推荐</div>
-      <div class="sub">从黑风洞回KLCC方向，Grab顺路</div>
-      <div class="food-grid">
-        <div class="name">🦀 肥肥蟹 Fei Fei Crab</div>
-        <div class="detail">📍Pavilion 8楼。咸蛋黄无壳蟹（孩子超爱！）、甘香奶油蟹、炸馒头蘸酱。18年老店。<span class="tag tag-red">必吃</span> 人均RM40~60</div>
-        <div class="divider"></div>
-        <div class="name">🍜 关夫人 Madam Kwan's</div>
-        <div class="detail">📍KLCC Suria 4F（回酒店顺路）不想跑远的稳选，叻沙+椰浆饭+三色饭(BoBoi Cham) <span class="tag tag-green">娃爱</span></div>
-        <div class="divider"></div>
-        <div class="name">🍛 华阳茶室</div>
-        <div class="detail">📍Pavilion附近。酥皮蛋挞必吃！椰浆鸡腿饭比脸大，咖椰面包配咖啡。<span class="tag tag-orange">排队王</span></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Day 3 · 7/26 吉隆坡→槟城 · 美食版 -->
-  <div class="day-card fly">
-    <div class="day-header">
-      <span class="day-title" id="day3">📅 Day 3 · 7/26（周日）吉隆坡→槟城</span>
-      <span class="badge">✈️ 转场 &nbsp;🍽️ 老城区</span>
-    </div>
-    <div class="time-row"><span class="time">08:00→</span><span class="content"><span class="emoji">🏛️</span>退房寄存行李 → 独立广场 · 中央艺术坊逛逛</span></div>
-    <div class="time-row"><span class="time">09:00→</span><span class="content"><span class="emoji">🍽️</span><b>新峰肉骨茶</b> 或 <b>金莲记</b> 早午餐 — 详见下方美食</span></div>
-    <div class="time-row"><span class="time">10:30→11:00</span><span class="content"><span class="emoji">🚕</span>回酒店取行李 → 去机场（可绕道Putrajaya看粉色清真寺🕌，去机场顺路+15min车程）</span></div>
-    <div class="time-row"><span class="time">✈️</span><span class="content">吉隆坡飞槟城（待买，约¥100+/人）</span></div>
-    <div class="time-row"><span class="time">16:00→</span><span class="content"><span class="emoji">🏨</span>入住乔治市酒店</span></div>
-    <div class="time-row"><span class="time">17:00→</span><span class="content"><span class="emoji">🚶</span>乔治市壁画街 · 姓周桥 · 吃煎蕊、炒粿条 🍜</span></div>
-
-    <!-- Day3 美食 -->
-    <div class="note-box food" style="margin-bottom:0;">
-      <div class="title">🍽️ 独立广场周边 · 早午餐推荐</div>
-      <div class="sub">📍 茨厂街/中央艺术坊步行可达 | 退房后顺路吃</div>
-      <div class="food-grid">
-        <div class="name">🫖 新峰肉骨茶</div>
-        <div class="detail">干/湿两种肉骨茶，药材浓汤派。推荐干肉骨茶（更香浓）+ 油条蘸汤。猫山王榴莲沙冰饭后必点！<span class="tag tag-red">必吃</span> 人均RM25~40</div>
-        <div class="divider"></div>
-        <div class="name">🍝 金莲记</div>
-        <div class="detail">茨厂街百年老店！福建黑炒面(Hokkien Mee)重油重酱锅气十足，还有月光河粉。<span class="tag tag-orange">百年老店</span></div>
-        <div class="divider"></div>
-        <div class="name">🍚 丽丰茶冰室</div>
-        <div class="detail">牛肉面、咖喱叻沙、冰咖啡。地道老式kopitiam，环境接地气，孩子吃牛肉面没问题。<span class="tag tag-green">老字号</span></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Day 4 — 榴莲日 -->
-  <div class="day-card durian">
-    <div class="day-header">
-      <span class="day-title" id="day4">🍈 Day 4 · 7/27（周一）槟城 · 榴莲日 🏆</span>
-      <span class="badge">⭐ 重头戏</span>
-    </div>
-    <div class="note-box durian" style="margin-top:0;">
-      <div class="title">🍈 7月 = 马来西亚榴莲黄金季！</div>
-      猫山王、黑刺、D24... 树上现摘，吃到饱！
-    </div>
-    <div class="time-row"><span class="time">09:00→15:00</span><span class="content"><span class="emoji">🌳</span><b>浮罗山背榴莲园</b> 🏆 — 榴莲自助餐任吃！¥100~150/人</span></div>
-    <div class="time-row"><span class="time">16:00→18:00</span><span class="content"><span class="emoji">🚡</span>回程路过<b>升旗山</b>坐缆车看全景</span></div>
-    <div class="time-row"><span class="time">晚上</span><span class="content"><span class="emoji">🍜</span>汕头街美食夜市</span></div>
-    <div class="note-box" style="margin-bottom:0;">
-      <div class="title">🍈 小红书攻略：浮罗山背吃榴莲</div>
-      博主去浮罗山背吃榴莲，「被老板疯狂投喂」吃到撑！<br>
-      宝盛园(Bao Sheng) 或 阿兴榴莲园 — 提前一天预约即可<br>
-      原文👉 <a href="http://xhslink.com/o/ApxQzDSCkbW" target="_blank" style="color:#2d6a9f;">点击查看小红书笔记</a>
-    </div>
-  </div>
-
-  <!-- Day 5 -->
-  <div class="day-card">
-    <div class="day-header">
-      <span class="day-title" id="day5">📅 Day 5 · 7/28（周二）槟城</span>
-      <span class="badge">🎢 放电日</span>
-    </div>
-    <div class="time-row"><span class="time">09:00→16:00</span><span class="content"><span class="emoji">🎢</span><b>ESCAPE主题乐园</b> — 世界最长滑水道、丛林探险 ⭐</span></div>
-    <div class="time-row"><span class="time">16:30→18:30</span><span class="content"><span class="emoji">🏖️</span><b>Batu Feringghi海滩</b> 踩水看日落</span></div>
-    <div class="time-row"><span class="time">晚上</span><span class="content"><span class="emoji">🦐</span>海鲜大餐</span></div>
-  </div>
-
-  <!-- Day 6 — 飞兰卡威 -->
-  <div class="day-card fly">
-    <div class="day-header">
-      <span class="day-title" id="day6">📅 Day 6 · 7/29（周三）槟城→兰卡威</span>
-      <span class="badge">✈️ 兰卡威</span>
-    </div>
-    <div class="time-row"><span class="time">上午</span><span class="content"><span class="emoji">🛍️</span>乔治市买点手信</span></div>
-    <div class="time-row"><span class="time">✈️</span><span class="content"><span class="emoji">✈️</span><b>飞萤航空</b> 槟城→兰卡威（40min，¥551/三人 ✅）</span></div>
-    <div class="time-row"><span class="time">下午</span><span class="content"><span class="emoji">🏨</span>入住珍南海滩附近</span></div>
-    <div class="time-row"><span class="time">傍晚</span><span class="content"><span class="emoji">🏖️</span><b>珍南海滩</b> 看日落散步</span></div>
-  </div>
-
-  <!-- Day 7 — 兰卡威 -->
-  <div class="day-card">
-    <div class="day-header">
-      <span class="day-title" id="day7">📅 Day 7 · 7/30（周四）兰卡威</span>
-      <span class="badge">⛵ 海岛日</span>
-    </div>
-    <div class="time-row"><span class="time">09:00→12:00</span><span class="content"><span class="emoji">🌉</span><b>天空之桥</b> — 坐缆车上山，悬空吊桥观景 ⭐</span></div>
-    <div class="time-row"><span class="time">下午</span><span class="content"><span class="emoji">🦅</span>老鹰广场 + 巨鹰喂食</span></div>
-    <div class="time-row"><span class="time">17:30→</span><span class="content"><span class="emoji">⛵</span><b>游艇落日巡航</b> — 海上看日落、跳海游泳 🎉</span></div>
-  </div>
-
-  <!-- Day 8 — 回吉隆坡 -->
-  <div class="day-card fly">
-    <div class="day-header">
-      <span class="day-title" id="day8">📅 Day 8 · 7/31（周五）兰卡威→吉隆坡</span>
-      <span class="badge">✈️ 回吉隆坡</span>
-    </div>
-    <div class="time-row"><span class="time">10:00→11:30</span><span class="content"><span class="emoji">🏖️</span>最后逛海滩 + 退房</span></div>
-    <div class="time-row"><span class="time">11:30→12:15</span><span class="content"><span class="emoji">🚕</span>去兰卡威机场 (Grab≈¥20~35)</span></div>
-    <div class="time-row"><span class="time">12:45→13:45</span><span class="content"><span class="emoji">✈️</span><b>亚航</b> 兰卡威→吉隆坡 ✅ 已购（¥632/三人）</span></div>
-    <div class="time-row"><span class="time">14:30→</span><span class="content"><span class="emoji">🍈</span><b>最后一顿榴莲</b> — 市区去<u>榴莲王 Durian Man</u>（武吉免登步行），有体力去<u>NSK</u>（最便宜RM8起）</span></div>
-    <div class="time-row"><span class="time">🏨</span><span class="content">住吉隆坡市区酒店 (≈¥200~400/晚)</span></div>
-  </div>
-
-  <!-- Day 9 — 回程 -->
-  <div class="day-card fly">
-    <div class="day-header">
-      <span class="day-title" id="day9">📅 Day 9 · 8/1（周六）回广州</span>
-      <span class="badge">✈️ 回家</span>
-    </div>
-    <div class="day-header"><span class="date">16:55 → 21:20 · CZ8012 · 座位55A·55B·55C ✅</span></div>
-    <div class="time-row"><span class="time">上午</span><span class="content"><span class="emoji">🛍️</span>退房、机场免税店</span></div>
-    <div class="time-row"><span class="time">16:55→21:20</span><span class="content"><span class="emoji">✈️</span><b>CZ8012 回广州</b> 🏡</span></div>
-  </div>
-
-  <!-- ✅ 已付清单 -->
+  <!-- 数据文件 -->
   <div class="note-box" style="margin-top:20px;">
-    <div class="title">✅ 已付清单</div>
-    <div style="font-size:14px; line-height:1.8;">
-      ✈️ 7/24 CZ349 广州→吉隆坡 52D·52E·52G ✔<br>
-      ✈️ 8/1 CZ8012 吉隆坡→广州 55A·55B·55C ✔<br>
-      ✈️ 7/29 17:35 PEN→LGK 槟城飞兰卡威（去哪儿¥396+154.95=¥551） ✔<br>
-      ✈️ 7/31 12:45 LGK→KUL 兰卡威飞吉隆坡（¥632/三人） ✔<br>
-      🔜 待订：KUL→PEN + ESCAPE门票 + 天空之桥 + 游艇落日<br>
-      🎉 客服确认联票120天有效，7/25继续用！不浪费 ✅
+    <div class="title">📊 数据驱动 · 小红书分析</div>
+    <div>所有餐厅和景点推荐基于小红书真实笔记交叉分析：</div>
+    <div style="margin-top:6px;">
+      <a href="xhs_results_KL.json" target="_blank">📄 吉隆坡美食评分 (55篇笔记)</a><br>
+      <a href="xhs_durian_KL.json" target="_blank">🍈 吉隆坡榴莲评分 (81篇笔记)</a>
     </div>
   </div>
 
-  <!-- 💰 费用总预估 -->
-  <div class="note-box" style="margin-top:12px;" id="budget">
-    <div class="title">💰 费用总预估 (1 MYR ≈ 1.68 CNY)</div>
-    <div style="display:grid; grid-template-columns:2fr 1fr 1fr; gap:3px 8px; font-size:13px;">
-      <span style="font-weight:600; border-bottom:1px solid #ddd; padding-bottom:4px;">项目</span>
-      <span style="font-weight:600; border-bottom:1px solid #ddd; padding-bottom:4px;">金额</span>
-      <span style="font-weight:600; border-bottom:1px solid #ddd; padding-bottom:4px;">马币</span>
-      <span>✅ 广州↔吉隆坡南航（原票价）</span><span>¥7,473</span><span>≈RM4,450</span>
-      <span>💸 改签损失</span><span>¥1,800</span><span>≈RM1,072</span>
-      <span>✅ Aquaria+Petrosains联票（7/25用）</span><span>¥635</span><span>MYR 378</span>
-      <span>✅ 7/29 17:35 PEN→LGK（去哪儿三人）</span><span>¥551</span><span>≈MYR 328</span>
-      <span>✅ 7/31 12:45 LGK→KUL（三人）</span><span>¥632</span><span>≈MYR 376</span>
-      <span style="border-top:1px solid #ddd; padding-top:4px; font-weight:700;">🔜 国内交通（仅剩KUL→PEN）</span><span style="border-top:1px solid #ddd; padding-top:4px;">~¥300~500</span><span style="border-top:1px solid #ddd; padding-top:4px;">~RM180~300</span>
-      <span>🔜 门票（ESCAPE+天空桥+游艇）</span><span>~¥1,600</span><span>~RM955</span>
-      <span>🔜 住宿8晚</span><span>~¥1,700~2,800</span><span>~RM1,015~1,670</span>
-      <span>🔜 餐饮9天+当地交通</span><span>~¥2,500~3,500</span><span>~RM1,490~2,090</span>
-      <span style="border-top:2px solid #2d6a9f; padding-top:4px; font-weight:700;">📊 总计预估</span>
-      <span style="border-top:2px solid #2d6a9f; padding-top:4px; font-weight:700; color:#2d6a9f;">≈¥16,640~18,890</span>
-      <span style="border-top:2px solid #2d6a9f; padding-top:4px;">≈RM9,910~11,245</span>
-    </div>
-  </div>
-
-  <!-- ✈️ 国内段机票 -->
-  <div class="note-box" style="margin-top:12px;">
-    <div class="title">✈️ 马来西亚国内段机票 (1 MYR ≈ 1.68 CNY)</div>
-    <div style="display:grid; grid-template-columns:1fr 70px 1fr 70px 50px; gap:3px 6px; font-size:13px;">
-      <span style="font-weight:600; border-bottom:1px solid #ddd; padding-bottom:4px;">段</span>
-      <span style="font-weight:600; border-bottom:1px solid #ddd; padding-bottom:4px;">航司</span>
-      <span style="font-weight:600; border-bottom:1px solid #ddd; padding-bottom:4px;">渠道</span>
-      <span style="font-weight:600; border-bottom:1px solid #ddd; padding-bottom:4px;">参考价</span>
-      <span style="font-weight:600; border-bottom:1px solid #ddd; padding-bottom:4px;">状态</span>
-      <span>KUL→PEN</span><span>飞萤/亚航</span><span>携程</span><span>¥80~120/人</span><span>🔜</span>
-      <span>PEN→LGK</span><span>飞萤</span><span>去哪儿</span><span>¥551/三人</span><span>✅</span>
-      <span>LGK→KUL</span><span>亚航</span><span>已购</span><span>¥632/三人</span><span>✅</span>
-    </div>
-    <div style="margin-top:6px; font-size:12px; color:#888;">
-      💡 7/26 KUL→PEN：直接飞机1h到<br>
-      💡 7/29 PEN→LGK：已购17:35飞 ✅<br>
-      💡 7/31 LGK→KUL：已购12:45飞 ✅<br>
-      国内三段已购两段，仅剩KUL→PEN待订
-    </div>
-  </div>
-
-  <!-- 🍽️ 吉隆坡美食总览 -->
-  <div class="note-box" style="margin-top:20px; border-left:3px solid #e8a838; background:#fef9ef;" id="food-overview">
-    <div class="title">🍽️ 吉隆坡3天 · 美食打卡总览（小红书精选）</div>
-    <div style="font-size:13px; color:#888; margin-bottom:8px;">📍 以下所有餐厅距离皇冠丽晶酒店步行/Grab ≤ 15分钟</div>
-    <div style="display:grid; grid-template-columns:1fr auto auto; gap:4px 12px; font-size:14px;">
-      <span style="font-weight:600; border-bottom:1px solid #e8dcc8;">店铺</span>
-      <span style="font-weight:600; border-bottom:1px solid #e8dcc8;">推荐菜</span>
-      <span style="font-weight:600; border-bottom:1px solid #e8dcc8;">人均</span>
-
-      <span>🔥 黄亚华烧鸡翅（阿罗街）</span><span>炭烤鸡翅</span><span>RM25</span>
-      <span style="border-bottom:1px dashed #f0e8d8; grid-column:1/-1;"></span>
-      <span>🦀 肥肥蟹（Pavilion 8F）</span><span>咸蛋黄蟹、奶油蟹</span><span>RM50</span>
-      <span style="border-bottom:1px dashed #f0e8d8; grid-column:1/-1;"></span>
-      <span>🍛 关夫人 Madam Kwan's（KLCC 4F）</span><span>椰浆饭、叻沙</span><span>RM35</span>
-      <span style="border-bottom:1px dashed #f0e8d8; grid-column:1/-1;"></span>
-      <span>☕ 华阳茶室（Pavilion附近）</span><span>酥皮蛋挞、椰浆饭</span><span>RM30</span>
-      <span style="border-bottom:1px dashed #f0e8d8; grid-column:1/-1;"></span>
-      <span>🫖 新峰肉骨茶（茨厂街）</span><span>干/湿肉骨茶、榴莲沙冰</span><span>RM35</span>
-      <span style="border-bottom:1px dashed #f0e8d8; grid-column:1/-1;"></span>
-      <span>🍝 金莲记（茨厂街）</span><span>福建黑炒面</span><span>RM25</span>
-      <span style="border-bottom:1px dashed #f0e8d8; grid-column:1/-1;"></span>
-      <span>🥟 Little Penang（KLCC 4F）</span><span>炒粿条、煎蕊</span><span>RM30</span>
-      <span style="border-bottom:1px dashed #f0e8d8; grid-column:1/-1;"></span>
-      <span>🍚 丽丰茶冰室（中央艺术坊）</span><span>牛肉面、咖喱叻沙</span><span>RM20</span>
-      <span style="border-bottom:1px dashed #f0e8d8; grid-column:1/-1;"></span>
-      <span>🥟 鼎泰丰（KLCC 4F）</span><span>小笼包、蛋炒饭</span><span>RM45</span>
-    </div>
-    <div style="margin-top:10px; padding-top:10px; border-top:1px solid #e8dcc8; font-size:13px; color:#666;">
-      💡 7/24晚阿罗街 → 7/25午KLCC + 晚肥肥蟹 → 7/26早新峰肉骨茶 — 完美闭环！
-    </div>
-  </div>
-
-  <!-- 🍈 吉隆坡榴莲指南 -->
-  <div class="note-box durian" style="margin-top:20px;">
-    <div class="title">🍈 吉隆坡榴莲店 · 小红书综合评分</div>
-    <div style="font-size:13px; color:#888; margin-bottom:8px;">基于81篇XHS笔记（推荐+避雷）交叉评分</div>
-    <div style="display:grid; grid-template-columns:1fr 1fr auto; gap:4px 10px; font-size:14px;">
-      <span style="font-weight:600;">店铺</span><span style="font-weight:600;">价格</span><span style="font-weight:600;">评分</span>
-
-      <span>🥇 <b>街边榴莲档</b>（茨厂街/阿罗街）</span><span>RM10-30/个</span><span>114</span>
-      <span style="font-size:12px; color:#888; grid-column:2/-1;">最便宜，本地人买，要会挑</span>
-      <span style="border-bottom:1px dashed #d0e0b0; grid-column:1/-1;"></span>
-
-      <span>🥇 <b>NSK Grocer</b>（Kuchai Lama）</span><span>RM8-47/个</span><span>89</span>
-      <span style="font-size:12px; color:#888; grid-column:2/-1;">超市价最低，黑刺RM47但要自己挑</span>
-      <span style="border-bottom:1px dashed #d0e0b0; grid-column:1/-1;"></span>
-
-      <span>🥈 <b>榴莲王 Durian Man</b>（武吉免登）</span><span>RM30-80</span><span>49</span>
-      <span style="font-size:12px; color:#888; grid-column:2/-1;">市区步行可达，品种全可拼盘 ⭐推荐住KLCC的你去这家</span>
-      <span style="border-bottom:1px dashed #d0e0b0; grid-column:1/-1;"></span>
-
-      <span>🥈 <b>Durian BB学院</b>（SS2）</span><span>RM68-88自助</span><span>60</span>
-      <span style="font-size:12px; color:#888; grid-column:2/-1;">猫山王任吃，有讲解，带娃友好（打车20min）</span>
-      <span style="border-bottom:1px dashed #d0e0b0; grid-column:1/-1;"></span>
-
-      <span>🥉 <b>SS2榴莲街</b>（Petaling Jaya）</span><span>RM20-50/个</span><span>62</span>
-      <span style="font-size:12px; color:#888; grid-column:2/-1;">档口多可比价，⚡游客价偏贵需砍价</span>
-    </div>
-  </div>
-
-  <!-- Tips Box -->
-  <div class="note-box warn" style="margin-top:20px;">
+  <!-- 出行备忘 -->
+  <div class="note-box warn" style="background:#fff6e0; margin-top:20px;">
     <div class="title">✅ 出行备忘</div>
     <div>📌 马来西亚 <b>免签</b>（护照有效期需到2027年2月以后）</div>
     <div>📌 7月吉隆坡/槟城 25~33°C，兰卡威 27~34°C，带夏装+薄外套</div>
@@ -632,6 +239,21 @@ body {
   </div>
 
 </div>
+
+<!-- 汇率脚本 -->
+<script>
+async function loadExchangeRate() {
+  try {
+    var r = await fetch('https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/myr.json');
+    var d = await r.json();
+    var rate = d.myr.cny;
+    document.getElementById('rate-display').textContent = '💱 当前汇率: 1 MYR = ¥' + rate.toFixed(4) + '  ·  ' + '1 CNY = ' + (1/rate).toFixed(4) + ' MYR';
+  } catch(e) {
+    document.getElementById('rate-display').textContent = '💱 参考汇率: 1 MYR ≈ ¥1.68 (实时加载失败)';
+  }
+}
+loadExchangeRate();
+</script>
 
 <div class="footer">
   ✈️ 7/24 → 8/1 · 吉隆坡+槟城+兰卡威 · 亲子之旅 🍈⛵<br>

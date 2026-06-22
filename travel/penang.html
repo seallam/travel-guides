@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🇲🇾 槟城 Penang · 亲子游</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: #f5f2eb;
+  color: #2d2d2d;
+  line-height: 1.7;
+  padding: 0 0 60px 0;
+}
+.header {
+  background: linear-gradient(135deg, #1a3a5c 0%, #2d6a9f 50%, #3c8dbc 100%);
+  color: white;
+  padding: 40px 20px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.header::after {
+  content: "✈️ 🍈 🌴";
+  position: absolute;
+  font-size: 80px;
+  opacity: 0.08;
+  right: -10px;
+  bottom: -10px;
+  transform: rotate(-15deg);
+}
+.header h1 { font-size: 28px; margin-bottom: 6px; letter-spacing: 2px; }
+.header .subtitle { font-size: 15px; opacity: 0.85; }
+.header .flight-info {
+  margin-top: 16px;
+  background: rgba(255,255,255,0.12);
+  display: inline-block;
+  padding: 8px 20px;
+  border-radius: 20px;
+  font-size: 14px;
+}
+.summary-bar {
+  background: white;
+  padding: 18px 20px;
+  margin: -10px 15px 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 10px;
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+.summary-bar .item { flex: 1; min-width: 100px; }
+.summary-bar .num { font-size: 22px; font-weight: 700; color: #2d6a9f; }
+.summary-bar .label { font-size: 12px; color: #888; }
+.container { max-width: 700px; margin: 0 auto; padding: 0 15px; }
+.day-card {
+  background: white;
+  border-radius: 14px;
+  padding: 20px;
+  margin-bottom: 14px;
+  box-shadow: 0 1px 8px rgba(0,0,0,0.05);
+  border-left: 4px solid #3c8dbc;
+}
+.day-card.highlight { border-left-color: #e8a838; background: #fffbf0; }
+.day-card.durian { border-left-color: #6b8c42; background: #f4f8ee; }
+.day-card.fly { border-left-color: #8e6baf; background: #f5f0f8; }
+.day-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.day-header .date {
+  font-size: 13px;
+  color: #999;
+}
+.day-header .badge {
+  font-size: 11px;
+  background: #3c8dbc;
+  color: white;
+  padding: 2px 10px;
+  border-radius: 10px;
+}
+.day-card.highlight .badge { background: #e8a838; }
+.day-card.durian .badge { background: #6b8c42; }
+.day-card.fly .badge { background: #8e6baf; }
+.day-title { font-size: 17px; font-weight: 700; }
+.time-row {
+  display: flex;
+  gap: 10px;
+  padding: 6px 0;
+  border-bottom: 1px dashed #eee;
+  align-items: baseline;
+}
+.time-row:last-child { border-bottom: none; }
+.time-row .time {
+  font-size: 13px;
+  font-weight: 600;
+  color: #3c8dbc;
+  min-width: 75px;
+  flex-shrink: 0;
+}
+.time-row .content { font-size: 14px; }
+.time-row .content .emoji { margin-right: 4px; }
+.note-box {
+  background: #eef6fb;
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin: 14px 0;
+  font-size: 14px;
+  line-height: 1.6;
+}
+.note-box.durian { background: #edf3e4; }
+.note-box.warn { background: #fff6e0; }
+.note-box.food { background: #fef9ef; border-left: 3px solid #e8a838; }
+.note-box .title { font-weight: 700; margin-bottom: 4px; }
+.note-box .sub { font-size: 13px; color: #666; margin-top: 2px; }
+.food-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 3px 10px;
+  font-size: 14px;
+  margin-top: 8px;
+}
+.food-grid .name { font-weight: 600; color: #2d6a9f; }
+.food-grid .detail { color: #444; }
+.food-grid .divider { grid-column: 1 / -1; border-bottom: 1px dashed #e8dcc8; margin: 2px 0; }
+.tag {
+  display: inline-block;
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 8px;
+  margin-right: 4px;
+}
+.tag-green { background: #e0f0d0; color: #3a6b1a; }
+.tag-orange { background: #fdebd0; color: #a0670a; }
+.tag-blue { background: #d6eaf8; color: #1a5276; }
+.tag-purple { background: #e8daf5; color: #5b2c8a; }
+.tag-red { background: #fde0e0; color: #a02020; }
+.footer {
+  text-align: center;
+  padding: 30px 20px;
+  font-size: 13px;
+  color: #999;
+}
+.emoji-lg { font-size: 20px; }
+@media (max-width: 480px) {
+  .header h1 { font-size: 24px; }
+  .summary-bar { margin: -10px 10px 16px; padding: 14px; }
+  .day-card { padding: 16px; }
+  .time-row .time { min-width: 65px; font-size: 12px; }
+  .time-row .content { font-size: 13px; }
+  .food-grid { grid-template-columns: 1fr; gap: 0; }
+  .food-grid .name { font-size: 13px; }
+  .food-grid .detail { font-size: 12px; margin-bottom: 4px; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>🍜 槟城 Penang · 亲子游</h1>
+  <div class="subtitle">Day 4→5 · 行程详情的子页面</div>
+  <div class="flight-info">
+    ✈️ 7/24 CZ349 广州08:30→吉隆坡12:45 &nbsp;·&nbsp; 8/1 CZ8012 吉隆坡16:55→广州21:20
+  </div>
+</div>
+
+<div class="summary-bar">
+  <div class="item">
+    <div class="num">7/24→8/1</div>
+    <div class="label">📅 出行日期</div>
+  </div>
+  <div class="item">
+    <div class="num">¥11,091</div>
+    <div class="label">💰 已支出</div>
+  </div>
+  <div class="item">
+    <div class="num">🍈</div>
+    <div class="label">榴莲季 · 吃到爽</div>
+  </div>
+</div>
+
+<!-- 导航 -->
+<div style="max-width:700px; margin:0 auto; padding:0 15px;">
+
+</div>
+
+<div class="container">
+
+  
+<div class="summary-bar">
+  <div class="item"><div class="num">7/24→8/1</div><div class="label">📅 出行日期</div></div>
+  <div class="item"><div class="num">¥11,091</div><div class="label">💰 已支出</div></div>
+  <div class="item"><div class="num">🍈</div><div class="label">榴莲季</div></div>
+</div>
+
+  <div style="max-width:700px; margin:0 auto; padding:0 15px;">
+    <div style="display:flex; gap:6px; background:white; padding:10px 16px; border-radius:12px; box-shadow:0 1px 6px rgba(0,0,0,0.06); margin-bottom:14px; flex-wrap:wrap;">
+      <a href="kl.html" style="padding:8px 16px; color:#2d6a9f; text-decoration:none; border-radius:8px; font-weight:500;">🗼 吉隆坡</a>
+<span style="padding:8px 16px; background:#2d6a9f; color:white; border-radius:8px; font-weight:600;">🍜 槟城</span>
+<a href="langkawi.html" style="padding:8px 16px; color:#2d6a9f; text-decoration:none; border-radius:8px; font-weight:500;">⛵ 兰卡威</a>
+
+      <span style="margin-left:auto; font-size:12px; color:#999; align-self:center;" id="rate-display">加载汇率中...</span>
+    </div>
+  </div>
+<div class="container">
+<!-- Day 4 — 榴莲日 -->
+  <div class="day-card durian">
+    <div class="day-header">
+      <span class="day-title" id="day4">🍈 Day 4 · 7/27（周一）槟城 · 榴莲日 🏆</span>
+      <span class="badge">⭐ 重头戏</span>
+    </div>
+    <div class="note-box durian" style="margin-top:0;">
+      <div class="title">🍈 7月 = 马来西亚榴莲黄金季！</div>
+      猫山王、黑刺、D24... 树上现摘，吃到饱！
+    </div>
+    <div class="time-row"><span class="time">09:00→15:00</span><span class="content"><span class="emoji">🌳</span><b>浮罗山背榴莲园</b> 🏆 — 榴莲自助餐任吃！¥100~150/人</span></div>
+    <div class="time-row"><span class="time">16:00→18:00</span><span class="content"><span class="emoji">🚡</span>回程路过<b>升旗山</b>坐缆车看全景</span></div>
+    <div class="time-row"><span class="time">晚上</span><span class="content"><span class="emoji">🍜</span>汕头街美食夜市</span></div>
+    <div class="note-box" style="margin-bottom:0;">
+      <div class="title">🍈 小红书攻略：浮罗山背吃榴莲</div>
+      博主去浮罗山背吃榴莲，「被老板疯狂投喂」吃到撑！<br>
+      宝盛园(Bao Sheng) 或 阿兴榴莲园 — 提前一天预约即可<br>
+      原文👉 <a href="http://xhslink.com/o/ApxQzDSCkbW" target="_blank" style="color:#2d6a9f;">点击查看小红书笔记</a>
+    </div>
+  </div>
+
+  
+
+<!-- Day 5 -->
+  <div class="day-card">
+    <div class="day-header">
+      <span class="day-title" id="day5">📅 Day 5 · 7/28（周二）槟城</span>
+      <span class="badge">🎢 放电日</span>
+    </div>
+    <div class="time-row"><span class="time">09:00→16:00</span><span class="content"><span class="emoji">🎢</span><b>ESCAPE主题乐园</b> — 世界最长滑水道、丛林探险 ⭐</span></div>
+    <div class="time-row"><span class="time">16:30→18:30</span><span class="content"><span class="emoji">🏖️</span><b>Batu Feringghi海滩</b> 踩水看日落</span></div>
+    <div class="time-row"><span class="time">晚上</span><span class="content"><span class="emoji">🦐</span>海鲜大餐</span></div>
+  </div>
+
+  
+
+
+
+  <div class="note-box warn" style="background:#fff6e0; margin-top:20px;">
+    <div class="title">✅ 出行备忘</div>
+    <div>📌 马来西亚 <b>免签</b>（护照有效期需到2027年2月以后）</div>
+    <div>📌 7月 25~34°C，带夏装+薄外套</div>
+    <div>📌 下载 Grab APP，打车很便宜</div>
+    <div>📌 带好儿童防晒+驱蚊水</div>
+  </div>
+</div>
+
+<script>
+// 实时汇率：MYR → CNY
+async function loadExchangeRate() {
+  try {
+    var r = await fetch('https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/myr.json');
+    var d = await r.json();
+    var rate = d.myr.cny;
+    document.getElementById('rate-display').textContent = '1 MYR = ¥' + rate.toFixed(4);
+    // 更新所有标注了 data-myr 的价格
+    document.querySelectorAll('[data-myr]').forEach(function(el) {
+      var myr = parseFloat(el.getAttribute('data-myr'));
+      if (!isNaN(myr)) {
+        var cny = (myr * rate).toFixed(0);
+        el.innerHTML = 'RM' + myr + ' <small style="color:#999;">(≈¥' + cny + ')</small>';
+      }
+    });
+  } catch(e) {
+    document.getElementById('rate-display').textContent = '汇率加载失败';
+  }
+}
+window.addEventListener('DOMContentLoaded', loadExchangeRate);
+</script>
+
+<div class="footer">
+  ✈️ 7/24 → 8/1 · 吉隆坡+槟城+兰卡威 · 亲子之旅 🍈⛵<br>
+  <span style="font-size:12px; opacity:0.6;">林啸 · 灌沂 · 小楼一家 · 2026年暑假</span>
+</div>
+</body>
+</html>

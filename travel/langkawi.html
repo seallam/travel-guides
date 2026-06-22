@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🇲🇾 兰卡威 Langkawi · 亲子游</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: #f5f2eb;
+  color: #2d2d2d;
+  line-height: 1.7;
+  padding: 0 0 60px 0;
+}
+.header {
+  background: linear-gradient(135deg, #1a3a5c 0%, #2d6a9f 50%, #3c8dbc 100%);
+  color: white;
+  padding: 40px 20px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.header::after {
+  content: "✈️ 🍈 🌴";
+  position: absolute;
+  font-size: 80px;
+  opacity: 0.08;
+  right: -10px;
+  bottom: -10px;
+  transform: rotate(-15deg);
+}
+.header h1 { font-size: 28px; margin-bottom: 6px; letter-spacing: 2px; }
+.header .subtitle { font-size: 15px; opacity: 0.85; }
+.header .flight-info {
+  margin-top: 16px;
+  background: rgba(255,255,255,0.12);
+  display: inline-block;
+  padding: 8px 20px;
+  border-radius: 20px;
+  font-size: 14px;
+}
+.summary-bar {
+  background: white;
+  padding: 18px 20px;
+  margin: -10px 15px 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 10px;
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+.summary-bar .item { flex: 1; min-width: 100px; }
+.summary-bar .num { font-size: 22px; font-weight: 700; color: #2d6a9f; }
+.summary-bar .label { font-size: 12px; color: #888; }
+.container { max-width: 700px; margin: 0 auto; padding: 0 15px; }
+.day-card {
+  background: white;
+  border-radius: 14px;
+  padding: 20px;
+  margin-bottom: 14px;
+  box-shadow: 0 1px 8px rgba(0,0,0,0.05);
+  border-left: 4px solid #3c8dbc;
+}
+.day-card.highlight { border-left-color: #e8a838; background: #fffbf0; }
+.day-card.durian { border-left-color: #6b8c42; background: #f4f8ee; }
+.day-card.fly { border-left-color: #8e6baf; background: #f5f0f8; }
+.day-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.day-header .date {
+  font-size: 13px;
+  color: #999;
+}
+.day-header .badge {
+  font-size: 11px;
+  background: #3c8dbc;
+  color: white;
+  padding: 2px 10px;
+  border-radius: 10px;
+}
+.day-card.highlight .badge { background: #e8a838; }
+.day-card.durian .badge { background: #6b8c42; }
+.day-card.fly .badge { background: #8e6baf; }
+.day-title { font-size: 17px; font-weight: 700; }
+.time-row {
+  display: flex;
+  gap: 10px;
+  padding: 6px 0;
+  border-bottom: 1px dashed #eee;
+  align-items: baseline;
+}
+.time-row:last-child { border-bottom: none; }
+.time-row .time {
+  font-size: 13px;
+  font-weight: 600;
+  color: #3c8dbc;
+  min-width: 75px;
+  flex-shrink: 0;
+}
+.time-row .content { font-size: 14px; }
+.time-row .content .emoji { margin-right: 4px; }
+.note-box {
+  background: #eef6fb;
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin: 14px 0;
+  font-size: 14px;
+  line-height: 1.6;
+}
+.note-box.durian { background: #edf3e4; }
+.note-box.warn { background: #fff6e0; }
+.note-box.food { background: #fef9ef; border-left: 3px solid #e8a838; }
+.note-box .title { font-weight: 700; margin-bottom: 4px; }
+.note-box .sub { font-size: 13px; color: #666; margin-top: 2px; }
+.food-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 3px 10px;
+  font-size: 14px;
+  margin-top: 8px;
+}
+.food-grid .name { font-weight: 600; color: #2d6a9f; }
+.food-grid .detail { color: #444; }
+.food-grid .divider { grid-column: 1 / -1; border-bottom: 1px dashed #e8dcc8; margin: 2px 0; }
+.tag {
+  display: inline-block;
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 8px;
+  margin-right: 4px;
+}
+.tag-green { background: #e0f0d0; color: #3a6b1a; }
+.tag-orange { background: #fdebd0; color: #a0670a; }
+.tag-blue { background: #d6eaf8; color: #1a5276; }
+.tag-purple { background: #e8daf5; color: #5b2c8a; }
+.tag-red { background: #fde0e0; color: #a02020; }
+.footer {
+  text-align: center;
+  padding: 30px 20px;
+  font-size: 13px;
+  color: #999;
+}
+.emoji-lg { font-size: 20px; }
+@media (max-width: 480px) {
+  .header h1 { font-size: 24px; }
+  .summary-bar { margin: -10px 10px 16px; padding: 14px; }
+  .day-card { padding: 16px; }
+  .time-row .time { min-width: 65px; font-size: 12px; }
+  .time-row .content { font-size: 13px; }
+  .food-grid { grid-template-columns: 1fr; gap: 0; }
+  .food-grid .name { font-size: 13px; }
+  .food-grid .detail { font-size: 12px; margin-bottom: 4px; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>⛵ 兰卡威 Langkawi · 亲子游</h1>
+  <div class="subtitle">Day 6→9 · 行程详情的子页面</div>
+  <div class="flight-info">
+    ✈️ 7/24 CZ349 广州08:30→吉隆坡12:45 &nbsp;·&nbsp; 8/1 CZ8012 吉隆坡16:55→广州21:20
+  </div>
+</div>
+
+<div class="summary-bar">
+  <div class="item">
+    <div class="num">7/24→8/1</div>
+    <div class="label">📅 出行日期</div>
+  </div>
+  <div class="item">
+    <div class="num">¥11,091</div>
+    <div class="label">💰 已支出</div>
+  </div>
+  <div class="item">
+    <div class="num">🍈</div>
+    <div class="label">榴莲季 · 吃到爽</div>
+  </div>
+</div>
+
+<!-- 导航 -->
+<div style="max-width:700px; margin:0 auto; padding:0 15px;">
+
+</div>
+
+<div class="container">
+
+  
+<div class="summary-bar">
+  <div class="item"><div class="num">7/24→8/1</div><div class="label">📅 出行日期</div></div>
+  <div class="item"><div class="num">¥11,091</div><div class="label">💰 已支出</div></div>
+  <div class="item"><div class="num">🍈</div><div class="label">榴莲季</div></div>
+</div>
+
+  <div style="max-width:700px; margin:0 auto; padding:0 15px;">
+    <div style="display:flex; gap:6px; background:white; padding:10px 16px; border-radius:12px; box-shadow:0 1px 6px rgba(0,0,0,0.06); margin-bottom:14px; flex-wrap:wrap;">
+      <a href="kl.html" style="padding:8px 16px; color:#2d6a9f; text-decoration:none; border-radius:8px; font-weight:500;">🗼 吉隆坡</a>
+<a href="penang.html" style="padding:8px 16px; color:#2d6a9f; text-decoration:none; border-radius:8px; font-weight:500;">🍜 槟城</a>
+<span style="padding:8px 16px; background:#2d6a9f; color:white; border-radius:8px; font-weight:600;">⛵ 兰卡威</span>
+
+      <span style="margin-left:auto; font-size:12px; color:#999; align-self:center;" id="rate-display">加载汇率中...</span>
+    </div>
+  </div>
+<div class="container">
+<!-- Day 6 — 飞兰卡威 -->
+  <div class="day-card fly">
+    <div class="day-header">
+      <span class="day-title" id="day6">📅 Day 6 · 7/29（周三）槟城→兰卡威</span>
+      <span class="badge">✈️ 兰卡威</span>
+    </div>
+    <div class="time-row"><span class="time">上午</span><span class="content"><span class="emoji">🛍️</span>乔治市买点手信</span></div>
+    <div class="time-row"><span class="time">✈️</span><span class="content"><span class="emoji">✈️</span><b>飞萤航空</b> 槟城→兰卡威（40min，¥551/三人 ✅）</span></div>
+    <div class="time-row"><span class="time">下午</span><span class="content"><span class="emoji">🏨</span>入住珍南海滩附近</span></div>
+    <div class="time-row"><span class="time">傍晚</span><span class="content"><span class="emoji">🏖️</span><b>珍南海滩</b> 看日落散步</span></div>
+  </div>
+
+  
+
+<!-- Day 7 — 兰卡威 -->
+  <div class="day-card">
+    <div class="day-header">
+      <span class="day-title" id="day7">📅 Day 7 · 7/30（周四）兰卡威</span>
+      <span class="badge">⛵ 海岛日</span>
+    </div>
+    <div class="time-row"><span class="time">09:00→12:00</span><span class="content"><span class="emoji">🌉</span><b>天空之桥</b> — 坐缆车上山，悬空吊桥观景 ⭐</span></div>
+    <div class="time-row"><span class="time">下午</span><span class="content"><span class="emoji">🦅</span>老鹰广场 + 巨鹰喂食</span></div>
+    <div class="time-row"><span class="time">17:30→</span><span class="content"><span class="emoji">⛵</span><b>游艇落日巡航</b> — 海上看日落、跳海游泳 🎉</span></div>
+  </div>
+
+  
+
+<!-- Day 8 — 回吉隆坡 -->
+  <div class="day-card fly">
+    <div class="day-header">
+      <span class="day-title" id="day8">📅 Day 8 · 7/31（周五）兰卡威→吉隆坡</span>
+      <span class="badge">✈️ 回吉隆坡</span>
+    </div>
+    <div class="time-row"><span class="time">10:00→11:30</span><span class="content"><span class="emoji">🏖️</span>最后逛海滩 + 退房</span></div>
+    <div class="time-row"><span class="time">11:30→12:15</span><span class="content"><span class="emoji">🚕</span>去兰卡威机场 (Grab≈¥20~35)</span></div>
+    <div class="time-row"><span class="time">12:45→13:45</span><span class="content"><span class="emoji">✈️</span><b>亚航</b> 兰卡威→吉隆坡 ✅ 已购（¥632/三人）</span></div>
+    <div class="time-row"><span class="time">14:30→</span><span class="content"><span class="emoji">🍈</span>吉隆坡逛街 + 最后一顿榴莲（Durian BB学院 或 SS2榴莲档）</span></div>
+    <div class="time-row"><span class="time">🏨</span><span class="content">住吉隆坡市区酒店 (≈¥200~400/晚)</span></div>
+  </div>
+
+  
+
+<!-- Day 9 — 回程 -->
+  <div class="day-card fly">
+    <div class="day-header">
+      <span class="day-title" id="day9">📅 Day 9 · 8/1（周六）回广州</span>
+      <span class="badge">✈️ 回家</span>
+    </div>
+    <div class="day-header"><span class="date">16:55 → 21:20 · CZ8012 · 座位55A·55B·55C ✅</span></div>
+    <div class="time-row"><span class="time">上午</span><span class="content"><span class="emoji">🛍️</span>退房、机场免税店</span></div>
+    <div class="time-row"><span class="time">16:55→21:20</span><span class="content"><span class="emoji">✈️</span><b>CZ8012 回广州</b> 🏡</span></div>
+  </div>
+
+  <!-- ✅ 已付清单 -->
+  <div class="note-box" style="margin-top:20px;">
+    <div class="title">✅ 已付清单</div>
+    <div style="font-size:14px; line-height:1.8;">
+      ✈️ 7/24 CZ349 广州→吉隆坡 52D·52E·52G ✔<br>
+      ✈️ 8/1 CZ8012 吉隆坡→广州 55A·55B·55C ✔<br>
+      ✈️ 7/29 17:35 PEN→LGK 槟城飞兰卡威（去哪儿¥396+154.95=¥551） ✔<br>
+      ✈️ 7/31 12:45 LGK→KUL 兰卡威飞吉隆坡（¥632/三人） ✔<br>
+      🔜 待订：KUL→PEN + ESCAPE门票 + 天空之桥 + 游艇落日<br>
+      🎉 客服确认联票120天有效，7/25继续用！不浪费 ✅
+    </div>
+  </div>
+
+  <!-- 💰 费用总预估 -->
+  <div class="note-box" style="margin-top:12px;" id="budget">
+    <div class="title">💰 费用总预估 (1 MYR ≈ 1.68 CNY)</div>
+    <div style="display:grid; grid-template-columns:2fr 1fr 1fr; gap:3px 8px; font-size:13px;">
+      <span style="font-weight:600; border-bottom:1px solid #ddd; padding-bottom:4px;">项目</span>
+      <span style="font-weight:600; border-bottom:1px solid #ddd; padding-bottom:4px;">金额</span>
+      <span style="font-weight:600; border-bottom:1px solid #ddd; padding-bottom:4px;">马币</span>
+      <span>✅ 广州↔吉隆坡南航（原票价）</span><span>¥7,473</span><span>≈RM4,450</span>
+      <span>💸 改签损失</span><span>¥1,800</span><span>≈RM1,072</span>
+      <span>✅ Aquaria+Petrosains联票（7/25用）</span><span>¥635</span><span>MYR 378</span>
+      <span>✅ 7/29 17:35 PEN→LGK（去哪儿三人）</span><span>¥551</span><span>≈MYR 328</span>
+      <span>✅ 7/31 12:45 LGK→KUL（三人）</span><span>¥632</span><span>≈MYR 376</span>
+      <span style="border-top:1px solid #ddd; padding-top:4px; font-weight:700;">🔜 国内交通（仅剩KUL→PEN）</span><span style="border-top:1px solid #ddd; padding-top:4px;">~¥300~500</span><span style="border-top:1px solid #ddd; padding-top:4px;">~RM180~300</span>
+      <span>🔜 门票（ESCAPE+天空桥+游艇）</span><span>~¥1,600</span><span>~RM955</span>
+      <span>🔜 住宿8晚</span><span>~¥1,700~2,800</span><span>~RM1,015~1,670</span>
+      <span>🔜 餐饮9天+当地交通</span><span>~¥2,500~3,500</span><span>~RM1,490~2,090</span>
+      <span style="border-top:2px solid #2d6a9f; padding-top:4px; font-weight:700;">📊 总计预估</span>
+      <span style="border-top:2px solid #2d6a9f; padding-top:4px; font-weight:700; color:#2d6a9f;">≈¥16,640~18,890</span>
+      <span style="border-top:2px solid #2d6a9f; padding-top:4px;">≈RM9,910~11,245</span>
+    </div>
+  </div>
+
+  <!-- ✈️ 国内段机票 -->
+  <div class="note-box" style="margin-top:12px;">
+    <div class="title">✈️ 马来西亚国内段机票 (1 MYR ≈ 1.68 CNY)</div>
+    <div style="display:grid; grid-template-columns:1fr 70px 1fr 70px 50px; gap:3px 6px; font-size:13px;">
+      <span style="font-weight:600; border-bottom:1px solid #ddd; padding-bottom:4px;">段</span>
+      <span style="font-weight:600; border-bottom:1px solid #ddd; padding-bottom:4px;">航司</span>
+      <span style="font-weight:600; border-bottom:1px solid #ddd; padding-bottom:4px;">渠道</span>
+      <span style="font-weight:600; border-bottom:1px solid #ddd; padding-bottom:4px;">参考价</span>
+      <span style="font-weight:600; border-bottom:1px solid #ddd; padding-bottom:4px;">状态</span>
+      <span>KUL→PEN</span><span>飞萤/亚航</span><span>携程</span><span>¥80~120/人</span><span>🔜</span>
+      <span>PEN→LGK</span><span>飞萤</span><span>去哪儿</span><span>¥551/三人</span><span>✅</span>
+      <span>LGK→KUL</span><span>亚航</span><span>已购</span><span>¥632/三人</span><span>✅</span>
+    </div>
+    <div style="margin-top:6px; font-size:12px; color:#888;">
+      💡 7/26 KUL→PEN：直接飞机1h到<br>
+      💡 7/29 PEN→LGK：已购17:35飞 ✅<br>
+      💡 7/31 LGK→KUL：已购12:45飞 ✅<br>
+      国内三段已购两段，仅剩KUL→PEN待订
+    </div>
+  </div>
+
+  <!-- 🍽️ 吉隆坡美食总览 -->
+  <div class="note-box" style="margin-top:20px; border-left:3px solid #e8a838; background:#fef9ef;" id="food-overview">
+    <div class="title">🍽️ 吉隆坡3天 · 美食打卡总览（小红书精选）</div>
+    <div style="font-size:13px; color:#888; margin-bottom:8px;">📍 以下所有餐厅距离皇冠丽晶酒店步行/Grab ≤ 15分钟</div>
+    <div style="display:grid; grid-template-columns:1fr auto auto; gap:4px 12px; font-size:14px;">
+      <span style="font-weight:600; border-bottom:1px solid #e8dcc8;">店铺</span>
+      <span style="font-weight:600; border-bottom:1px solid #e8dcc8;">推荐菜</span>
+      <span style="font-weight:600; border-bottom:1px solid #e8dcc8;">人均</span>
+
+      <span>🔥 黄亚华烧鸡翅（阿罗街）</span><span>炭烤鸡翅</span><span>RM25</span>
+      <span style="border-bottom:1px dashed #f0e8d8; grid-column:1/-1;"></span>
+      <span>🦀 肥肥蟹（Pavilion 8F）</span><span>咸蛋黄蟹、奶油蟹</span><span>RM50</span>
+      <span style="border-bottom:1px dashed #f0e8d8; grid-column:1/-1;"></span>
+      <span>🍛 关夫人 Madam Kwan's（KLCC 4F）</span><span>椰浆饭、叻沙</span><span>RM35</span>
+      <span style="border-bottom:1px dashed #f0e8d8; grid-column:1/-1;"></span>
+      <span>☕ 华阳茶室（Pavilion附近）</span><span>酥皮蛋挞、椰浆饭</span><span>RM30</span>
+      <span style="border-bottom:1px dashed #f0e8d8; grid-column:1/-1;"></span>
+      <span>🫖 新峰肉骨茶（茨厂街）</span><span>干/湿肉骨茶、榴莲沙冰</span><span>RM35</span>
+      <span style="border-bottom:1px dashed #f0e8d8; grid-column:1/-1;"></span>
+      <span>🍝 金莲记（茨厂街）</span><span>福建黑炒面</span><span>RM25</span>
+      <span style="border-bottom:1px dashed #f0e8d8; grid-column:1/-1;"></span>
+      <span>🥟 Little Penang（KLCC 4F）</span><span>炒粿条、煎蕊</span><span>RM30</span>
+      <span style="border-bottom:1px dashed #f0e8d8; grid-column:1/-1;"></span>
+      <span>🍚 丽丰茶冰室（中央艺术坊）</span><span>牛肉面、咖喱叻沙</span><span>RM20</span>
+      <span style="border-bottom:1px dashed #f0e8d8; grid-column:1/-1;"></span>
+      <span>🥟 鼎泰丰（KLCC 4F）</span><span>小笼包、蛋炒饭</span><span>RM45</span>
+    </div>
+    <div style="margin-top:10px; padding-top:10px; border-top:1px solid #e8dcc8; font-size:13px; color:#666;">
+      💡 7/24晚阿罗街 → 7/25午KLCC + 晚肥肥蟹 → 7/26早新峰肉骨茶 — 完美闭环！
+    </div>
+  </div>
+
+  <!-- Tips Box -->
+  <div class="note-box warn" style="margin-top:20px;">
+    <div class="title">✅ 出行备忘</div>
+    <div>📌 马来西亚 <b>免签</b>（护照有效期需到2027年2月以后）</div>
+    <div>📌 7月吉隆坡/槟城 25~33°C，兰卡威 27~34°C，带夏装+薄外套</div>
+    <div>📌 槟城榴莲园建议提前半天预约，可包车一日游</div>
+    <div>📌 下载 Grab APP（东南亚滴滴），打车很便宜</div>
+    <div>📌 带好儿童防晒+驱蚊水</div>
+    <div>📌 兰卡威免税岛，巧克力、酒比吉隆坡便宜不少</div>
+  </div>
+
+</div>
+
+<div class="footer">
+  ✈️ 7/24 → 8/1 · 吉隆坡+槟城+兰卡威 · 亲子之旅 🍈⛵<br>
+  <span style="font-size:12px; opacity:0.6;">林啸 · 灌沂 · 小楼一家 · 2026年暑假</span>
+</div>
+
+</body>
+</html>
+
+
+
+
+  <div class="note-box warn" style="background:#fff6e0; margin-top:20px;">
+    <div class="title">✅ 出行备忘</div>
+    <div>📌 马来西亚 <b>免签</b>（护照有效期需到2027年2月以后）</div>
+    <div>📌 7月 25~34°C，带夏装+薄外套</div>
+    <div>📌 下载 Grab APP，打车很便宜</div>
+    <div>📌 带好儿童防晒+驱蚊水</div>
+  </div>
+</div>
+
+<script>
+// 实时汇率：MYR → CNY
+async function loadExchangeRate() {
+  try {
+    var r = await fetch('https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/myr.json');
+    var d = await r.json();
+    var rate = d.myr.cny;
+    document.getElementById('rate-display').textContent = '1 MYR = ¥' + rate.toFixed(4);
+    // 更新所有标注了 data-myr 的价格
+    document.querySelectorAll('[data-myr]').forEach(function(el) {
+      var myr = parseFloat(el.getAttribute('data-myr'));
+      if (!isNaN(myr)) {
+        var cny = (myr * rate).toFixed(0);
+        el.innerHTML = 'RM' + myr + ' <small style="color:#999;">(≈¥' + cny + ')</small>';
+      }
+    });
+  } catch(e) {
+    document.getElementById('rate-display').textContent = '汇率加载失败';
+  }
+}
+window.addEventListener('DOMContentLoaded', loadExchangeRate);
+</script>
+
+<div class="footer">
+  ✈️ 7/24 → 8/1 · 吉隆坡+槟城+兰卡威 · 亲子之旅 🍈⛵<br>
+  <span style="font-size:12px; opacity:0.6;">林啸 · 灌沂 · 小楼一家 · 2026年暑假</span>
+</div>
+</body>
+</html>
