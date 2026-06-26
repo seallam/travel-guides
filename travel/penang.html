@@ -201,12 +201,21 @@ body {
       <span class="border-dash"></span>
       <span>🥈 <b>石屋榴莲 Tree Rest</b></span><span>RM50-70/人</span><span>🔥🔥</span>
       <span class="border-dash"></span>
+      <span>🥉 <b>榴金岁月</b>（乔治市）</span><span>RM15-40/个</span><span>🔥</span>
+      <span class="note">乔治市榴莲档，三星推荐</span>
+      <span class="border-dash"></span>
+      <span>🥉 <b>榴莲天下</b>（乔治市）</span><span>RM30-60</span><span>🔥</span>
+      <span class="note">乔治市榴莲自助</span>
+      <span class="border-dash"></span>
+      <span>🥉 <b>榴莲街</b>（乔治市）</span><span>RM15-40/个</span><span>🔥</span>
+      <span class="note">榴莲集中区，多家可选</span>
+      <span class="border-dash"></span>
       <span>🥉 <b>光大榴莲摊</b>（市区）</span><span>RM15-40/个</span><span>🔥</span>
       <span class="note">走之前补一盒超方便</span>
     </div>
     <div style="margin-top:10px; padding-top:10px; border-top:1px solid #d0e0b0; font-size:13px; color:#555;">
       💡 建议去<b>808榴莲园</b>（¥64/人不限时），性价比拉满<br>
-      💡 29号走之前光大榴莲摊再补一刀
+      💡 29号走之前光大榴莲摊或榴金岁月再补一刀
     </div>
   </div>
 
@@ -234,6 +243,90 @@ body {
       <a href="/penang-food-guide.html" target="_blank" style="color:#2d6a9f; font-weight:600;">查看完整版 🍜</a>
     </div>
   </div>
+
+  <!-- 🗺️ 槟城地图 -->
+  <div class="map-section-p">
+    <button class="map-toggle-p" onclick="toggleMapP()">🗺️ 槟城美食地图 <span id="map-arrow-p">▶</span></button>
+    <div id="map-container-p" class="map-collapsed-p">
+      <div id="penang-map" style="height:400px; border-radius:12px;"></div>
+      <div style="font-size:12px; color:#999; padding:6px 0; text-align:center;">
+        🔴 景点 · 🟢 美食 · 🍈 榴莲 · 🏨 住宿
+      </div>
+    </div>
+  </div>
+
+  <style>
+  .map-toggle-p {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 12px 16px;
+    width: 100%; cursor: pointer;
+    font-size: 15px; font-weight: 600; color: #2d6a9f;
+    text-align: left;
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 8px; transition: all 0.2s;
+  }
+  .map-toggle-p:hover { background: #eef6fb; }
+  #map-container-p { overflow: hidden; transition: max-height 0.4s ease; max-height: 0; }
+  #map-container-p.map-expanded-p { max-height: 500px; }
+  #map-container-p.map-collapsed-p { max-height: 0; }
+  .map-section-p { margin-top: 20px; }
+  </style>
+  <script>
+  function toggleMapP() {
+    var c = document.getElementById('map-container-p');
+    var a = document.getElementById('map-arrow-p');
+    var e = c.classList.contains('map-expanded-p');
+    if (!e && !window.mapLoadedP) { loadMapP(); }
+    c.classList.toggle('map-expanded-p');
+    c.classList.toggle('map-collapsed-p');
+    a.textContent = e ? '▶' : '▼';
+  }
+  function loadMapP() {
+    if (window.mapLoadedP) return;
+    window.mapLoadedP = true;
+    var s = document.createElement('link');
+    s.rel = 'stylesheet'; s.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+    document.head.appendChild(s);
+    var j = document.createElement('script');
+    j.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+    j.onload = function(){
+      var map = L.map('penang-map').setView([5.405, 100.305], 13);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenSM', maxZoom: 19
+      }).addTo(map);
+
+      var fi = function(e) {
+        return L.divIcon({className: '', html: e, iconSize: [24,24]});
+      };
+
+      // 🏨 住宿
+      L.marker([5.4140, 100.3100]).addTo(map).bindPopup('<b>🏨 葛霓特豪华酒店</b><br>光大KOMTAR对面');
+
+      // 🔴 景点
+      L.marker([5.4240, 100.2640], {icon: fi('🚡')}).addTo(map).bindPopup('<b>升旗山</b><br>缆车登顶');
+      L.marker([5.3990, 100.2790], {icon: fi('🏛️')}).addTo(map).bindPopup('<b>极乐寺</b><br>东南亚最大佛寺');
+      L.marker([5.4140, 100.3400], {icon: fi('🚶')}).addTo(map).bindPopup('<b>壁画街</b><br>乔治市');
+      L.marker([5.4110, 100.3370], {icon: fi('🏘️')}).addTo(map).bindPopup('<b>姓周桥</b><br>水上人家');
+
+      // 🟢 美食
+      L.marker([5.4150, 100.3320], {icon: fi('🍜')}).addTo(map).bindPopup('<b>汕头街夜市</b><br>四大天王');
+      L.marker([5.4140, 100.3310], {icon: fi('🥟')}).addTo(map).bindPopup('<b>多春茶座</b><br>咖椰包早餐');
+      L.marker([5.4130, 100.3330], {icon: fi('🍝')}).addTo(map).bindPopup('<b>Tek Sen 得星</b><br>必比登潮州菜');
+      L.marker([5.4120, 100.3300], {icon: fi('🫖')}).addTo(map).bindPopup('<b>愉园茶室 Joo Hooi</b><br>亚参叻沙');
+
+      // 🍈 榴莲
+      L.marker([5.3500, 100.2200], {icon: fi('🍈')}).addTo(map).bindPopup('<b>808榴莲园</b><br>浮罗山背·RM38不限时');
+      L.marker([5.4145, 100.3320], {icon: fi('🍈')}).addTo(map).bindPopup('<b>榴金岁月</b><br>乔治市榴莲档');
+      L.marker([5.4135, 100.3330], {icon: fi('🍈')}).addTo(map).bindPopup('<b>榴莲天下</b><br>乔治市榴莲自助');
+      L.marker([5.4155, 100.3290], {icon: fi('🍈')}).addTo(map).bindPopup('<b>榴莲街</b><br>乔治市榴莲集中区');
+
+      map.invalidateSize();
+    };
+    document.body.appendChild(j);
+  }
+  </script>
 
   <!-- Tips -->
   <div class="note-box warn" style="margin-top:14px;">
