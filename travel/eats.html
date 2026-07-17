@@ -299,6 +299,62 @@ function render() {
   document.getElementById("results").innerHTML = html;
 }
 
+// ====== IP 定位 + GPS 兜底 ======
+function locateByIP() {
+  var xhr = new XMLHttpRequest();
+  xhr.open("GET", "https://ipapi.co/json/", true);
+  xhr.onload = function() {
+    try {
+      var data = JSON.parse(xhr.responseText);
+      var city = (data.city || "").toLowerCase();
+      if (city.indexOf("kuala") > -1 || city.indexOf("kualalumpur") > -1) {
+        userPos = [3.148, 101.705]; currentFilter = "kl";
+      } else if (city.indexOf("penang") > -1 || city.indexOf("george") > -1 ||
+                 city.indexOf("pulau") > -1 || city.indexOf("butterworth") > -1) {
+        userPos = [5.414, 100.332]; currentFilter = "penang";
+      } else if (city.indexOf("langkawi") > -1 || city.indexOf("kuah") > -1) {
+        userPos = [6.293, 99.727]; currentFilter = "langkawi";
+      } else {
+        currentFilter = "all";
+      }
+      document.getElementById("locStatus").textContent = "📍 IP定位: " + (data.city || "未知") + " · " + (data.country_name || "");
+    } catch(e) {
+      currentFilter = "all";
+      document.getElementById("locStatus").textContent = "📍 无法定位，显示全部";
+    }
+    updateFilterUI();
+    render();
+  };
+  xhr.onerror = function() {
+    currentFilter = "all";
+    document.getElementById("locStatus").textContent = "📍 无法定位，显示全部";
+    updateFilterUI();
+    render();
+  };
+  xhr.send();
+}
+
+// 也尝试 GPS（但不强制弹窗）
+if ("geolocation" in navigator) {
+  navigator.geolocation.getCurrentPosition(
+    function(pos) {
+      userPos = [pos.coords.latitude, pos.coords.longitude];
+      document.getElementById("locStatus").textContent =
+        "📍 GPS: " + pos.coords.latitude.toFixed(4) + ", " + pos.coords.longitude.toFixed(4);
+      currentFilter = getCityFilter();
+      updateFilterUI();
+      render();
+    },
+    function() {
+      // GPS失败就用IP定位
+      locateByIP();
+    },
+    { enableHighAccuracy: false, timeout: 5000 }
+  );
+} else {
+  locateByIP();
+}
+
 // ====== 手动选择区域 ======
 document.getElementById("manualLoc").addEventListener("click", function(e) {
   if (e.target.classList.contains("loc-btn")) {
@@ -308,32 +364,6 @@ document.getElementById("manualLoc").addEventListener("click", function(e) {
     render();
   }
 });
-
-// ====== 获取位置 ======
-if ("geolocation" in navigator) {
-  navigator.geolocation.getCurrentPosition(
-    function(pos) {
-      userPos = [pos.coords.latitude, pos.coords.longitude];
-      document.getElementById("locStatus").textContent =
-        "📍 " + pos.coords.latitude.toFixed(4) + ", " + pos.coords.longitude.toFixed(4);
-      // 自动切换到所在城市
-      currentFilter = getCityFilter();
-      updateFilterUI();
-      render();
-    },
-    function(err) {
-      document.getElementById("locStatus").textContent = "📍 无法获取位置，请手动选择区域";
-      currentFilter = "all";
-      updateFilterUI();
-      render();
-    },
-    { enableHighAccuracy: true, timeout: 10000 }
-  );
-} else {
-  document.getElementById("locStatus").textContent = "📍 浏览器不支持定位";
-  currentFilter = "kl";
-  render();
-}
 
 // ====== 筛选按钮 ======
 document.getElementById("filterBar").addEventListener("click", function(e) {
