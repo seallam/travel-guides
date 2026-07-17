@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>附近美食 · 马来西亚</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: #f5f2eb;
+  color: #333;
+  padding-bottom: 80px;
+}
+.header {
+  background: linear-gradient(135deg, #1a3a5c, #2d6a9f);
+  color: white;
+  padding: 50px 16px 20px;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.header h1 { font-size: 20px; font-weight: 700; }
+.header .sub { font-size: 13px; opacity: 0.8; margin-top: 4px; }
+.header .loc { font-size: 12px; opacity: 0.7; margin-top: 6px; }
+.container { max-width: 640px; margin: 0 auto; padding: 12px; }
+.loading {
+  text-align: center;
+  padding: 60px 20px;
+  color: #999;
+}
+.loading .spinner {
+  width: 36px; height: 36px;
+  border: 3px solid #ddd; border-top-color: #2d6a9f;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 0 auto 16px;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.card {
+  background: white;
+  border-radius: 14px;
+  padding: 16px;
+  margin-bottom: 12px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+  display: flex;
+  gap: 12px;
+  transition: transform 0.15s;
+  border-left: 4px solid #3c8dbc;
+}
+.card:active { transform: scale(0.98); }
+.card .icon { font-size: 28px; width: 40px; text-align: center; flex-shrink: 0; }
+.card .info { flex: 1; min-width: 0; }
+.card .name { font-size: 15px; font-weight: 700; }
+.card .name small { font-weight: 400; font-size: 12px; color: #888; margin-left: 4px; }
+.card .meta { font-size: 12px; color: #888; margin-top: 3px; display: flex; gap: 8px; flex-wrap: wrap; }
+.card .meta .dist { color: #2d6a9f; font-weight: 600; }
+.card .tags { display: flex; gap: 4px; margin-top: 5px; flex-wrap: wrap; }
+.card .tags span {
+  font-size: 11px; padding: 2px 8px; border-radius: 8px;
+  background: #eef6fb; color: #2d6a9f;
+}
+.card .tags .durian { background: #edf3e4; color: #6b8c42; }
+.card .tags .penang { background: #fdebd0; color: #a0670a; }
+.card .tags .langkawi { background: #e8daf5; color: #5b2c8a; }
+.card .price { font-size: 12px; color: #e67e22; font-weight: 600; margin-top: 3px; }
+.filter-bar {
+  display: flex; gap: 6px; padding: 8px 12px; overflow-x: auto;
+  background: white; border-bottom: 1px solid #eee;
+  position: sticky; top: 96px; z-index: 9;
+}
+.filter-bar .btn {
+  flex-shrink: 0; font-size: 13px; padding: 6px 14px; border-radius: 20px;
+  border: 1px solid #ddd; background: white; color: #666;
+  cursor: pointer; transition: all 0.2s;
+}
+.filter-bar .btn.active {
+  background: #2d6a9f; color: white; border-color: #2d6a9f;
+}
+.footer {
+  text-align: center; padding: 20px; font-size: 12px; color: #999;
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>🍜 附近美食</h1>
+  <div class="sub">基于小红书评分 · 按距离排序</div>
+  <div class="loc" id="locStatus">📍 正在获取位置...</div>
+</div>
+
+<div class="filter-bar" id="filterBar">
+  <span class="btn active" data-filter="all">全部</span>
+  <span class="btn" data-filter="kl">🗼 吉隆坡</span>
+  <span class="btn" data-filter="penang">🍜 槟城</span>
+  <span class="btn" data-filter="langkawi">⛵ 兰卡威</span>
+</div>
+
+<div class="container" id="results">
+  <div class="loading">
+    <div class="spinner"></div>
+    获取您的位置...
+  </div>
+</div>
+
+<div class="footer">📊 数据来源：小红书笔记交叉评分</div>
+
+<script>
+// ====== 餐厅数据库 ======
+const RESTAURANTS = [
+  // ===== 吉隆坡 =====
+  { name: "黄亚华烧鸡翅", en: "Wong Ah Wah", city: "kl", cat: "夜市烧烤",
+    coord: [3.1440, 101.7070], price: "RM25-40", dishes: "炭烤鸡翅⭐、沙爹串",
+    icon: "🍗", tags: ["阿罗街", "晚饭"], score: 92 },
+  { name: "明记烧鱼", en: "Meng Kee", city: "kl", cat: "烧烤",
+    coord: [3.1440, 101.7070], price: "RM20-40", dishes: "魔鬼鱼⭐、金鲳鱼",
+    icon: "🐟", tags: ["阿罗街", "晚饭"], score: 85 },
+  { name: "关夫人 Madam Kwan's", en: "", city: "kl", cat: "马来菜",
+    coord: [3.1575, 101.7132], price: "RM30-45", dishes: "椰浆饭⭐、叻沙",
+    icon: "🍛", tags: ["KLCC", "午饭"], score: 88 },
+  { name: "华阳茶室", en: "Oriental Kopi", city: "kl", cat: "茶室",
+    coord: [3.1495, 101.7142], price: "RM25-35", dishes: "酥皮蛋挞🥇、咖椰面包",
+    icon: "☕", tags: ["早餐", "Pavilion"], score: 90 },
+  { name: "新峰肉骨茶", en: "Sun Fong BKT", city: "kl", cat: "肉骨茶",
+    coord: [3.1445, 101.6960], price: "RM25-40", dishes: "干肉骨茶⭐、湿肉骨茶",
+    icon: "🫖", tags: ["茨厂街", "早午餐"], score: 91 },
+  { name: "金莲记", en: "Kim Lian Kee", city: "kl", cat: "福建面",
+    coord: [3.1435, 101.6965], price: "RM20-30", dishes: "福建黑炒面⭐",
+    icon: "🍝", tags: ["茨厂街", "午饭"], score: 82 },
+  { name: "丽丰茶冰室", en: "Lai Foong Cafe", city: "kl", cat: "茶室",
+    coord: [3.1430, 101.6955], price: "RM15-25", dishes: "牛肉面⭐、咖喱叻沙",
+    icon: "🍚", tags: ["早餐", "中央艺术坊"], score: 80 },
+  { name: "Little Penang Cafe", en: "", city: "kl", cat: "槟城小吃",
+    coord: [3.1575, 101.7130], price: "RM25-35", dishes: "炒粿条⭐、煎蕊",
+    icon: "🥟", tags: ["KLCC", "午饭"], score: 83 },
+  { name: "肥肥蟹", en: "Fei Fei Crab", city: "kl", cat: "海鲜",
+    coord: [3.1485, 101.7140], price: "RM40-60", dishes: "咸蛋黄无壳蟹⭐",
+    icon: "🦀", tags: ["Pavilion", "晚饭"], score: 89 },
+  { name: "鼎泰丰", en: "Din Tai Fung", city: "kl", cat: "中式",
+    coord: [3.1575, 101.7133], price: "RM40-55", dishes: "小笼包⭐、蛋炒饭",
+    icon: "🥟", tags: ["KLCC", "午饭"], score: 78 },
+  // 榴莲
+  { name: "榴莲王 Durian Man", en: "", city: "kl", cat: "榴莲",
+    coord: [3.1460, 101.7130], price: "RM30-80", dishes: "猫山王、黑刺",
+    icon: "🍈", tags: ["武吉免登", "榴莲"], score: 86 },
+  { name: "Durian BB学院", en: "", city: "kl", cat: "榴莲",
+    coord: [3.1180, 101.6250], price: "RM68-88自助", dishes: "猫山王任吃",
+    icon: "🍈", tags: ["SS2", "榴莲"], score: 87 },
+  { name: "NSK Grocer", en: "", city: "kl", cat: "榴莲",
+    coord: [3.0870, 101.6880], price: "RM8-47/个", dishes: "黑刺RM47",
+    icon: "🍈", tags: ["Kuchai", "榴莲"], score: 83 },
+
+  // ===== 槟城 =====
+  { name: "汕头街夜市", en: "Kimberley Street", city: "penang", cat: "夜市",
+    coord: [5.4150, 100.3320], price: "RM5-20", dishes: "炒粿条、鸭粥粿条、天皇鸡脚",
+    icon: "🍜", tags: ["乔治市", "晚饭"], score: 93 },
+  { name: "多春茶座", en: "", city: "penang", cat: "茶室",
+    coord: [5.4140, 100.3310], price: "RM10-20", dishes: "咖椰包⭐、半熟蛋、白咖啡",
+    icon: "🥟", tags: ["乔治市", "早餐"], score: 88 },
+  { name: "Tek Sen 得星", en: "", city: "penang", cat: "潮州菜",
+    coord: [5.4130, 100.3330], price: "RM20-40", dishes: "双烤肉腩⭐",
+    icon: "🍝", tags: ["乔治市", "必比登"], score: 90 },
+  { name: "愉园茶室 Joo Hooi", en: "", city: "penang", cat: "茶室",
+    coord: [5.4120, 100.3300], price: "RM5-15", dishes: "亚参叻沙⭐、福建虾面",
+    icon: "🍜", tags: ["乔治市", "必比登"], score: 89 },
+  { name: "姐妹炒粿条", en: "", city: "penang", cat: "街头",
+    coord: [5.4160, 100.3330], price: "RM10-15", dishes: "炭火炒粿条⭐",
+    icon: "🍝", tags: ["乔治市", "米其林Selected"], score: 87 },
+  { name: "槟榔律潮州煎蕊", en: "Cendol", city: "penang", cat: "甜品",
+    coord: [5.4145, 100.3315], price: "RM4-6", dishes: "煎蕊⭐",
+    icon: "🍧", tags: ["乔治市", "甜品"], score: 85 },
+  { name: "Line Clear Nasi Kandar", en: "", city: "penang", cat: "印度饭",
+    coord: [5.4135, 100.3310], price: "RM8-15", dishes: "Nasi Kandar Banjir⭐",
+    icon: "🍛", tags: ["乔治市", "必比登"], score: 84 },
+  { name: "Hameediyah", en: "", city: "penang", cat: "印度",
+    coord: [5.4125, 100.3320], price: "RM8-15", dishes: "Murtabak⭐",
+    icon: "🫓", tags: ["乔治市", "1907年老店"], score: 83 },
+  // 榴莲
+  { name: "808榴莲园", en: "", city: "penang", cat: "榴莲",
+    coord: [5.3500, 100.2200], price: "RM38-68自助", dishes: "猫山王⭐",
+    icon: "🍈", tags: ["浮罗山背", "榴莲"], score: 95 },
+  { name: "榴金岁月", en: "", city: "penang", cat: "榴莲",
+    coord: [5.4145, 100.3320], price: "RM15-40", dishes: "榴莲档",
+    icon: "🍈", tags: ["乔治市", "榴莲"], score: 78 },
+  { name: "榴莲天下", en: "", city: "penang", cat: "榴莲",
+    coord: [5.4135, 100.3330], price: "RM30-60", dishes: "榴莲自助",
+    icon: "🍈", tags: ["乔治市", "榴莲"], score: 80 },
+  { name: "榴莲街", en: "", city: "penang", cat: "榴莲",
+    coord: [5.4155, 100.3290], price: "RM15-40", dishes: "榴莲集中区",
+    icon: "🍈", tags: ["乔治市", "榴莲"], score: 82 },
+  { name: "光大榴莲摊", en: "", city: "penang", cat: "榴莲",
+    coord: [5.4140, 100.3280], price: "RM15-40/个", dishes: "猫山王",
+    icon: "🍈", tags: ["乔治市", "榴莲"], score: 80 },
+
+  // ===== 兰卡威 =====
+  { name: "真浪花园海鲜", en: "Orkid Ria", city: "langkawi", cat: "海鲜",
+    coord: [6.2930, 99.7270], price: "RM80-100", dishes: "奶油老虎虾🦞、黑胡椒蟹",
+    icon: "🦐", tags: ["珍南海滩", "晚饭"], score: 92 },
+  { name: "Hidden Langkawi", en: "", city: "langkawi", cat: "日落酒吧",
+    coord: [6.2920, 99.7260], price: "RM60-100", dishes: "日落🌅、鸡尾酒🍹",
+    icon: "🍸", tags: ["珍南海滩", "日落"], score: 88 },
+  { name: "Red Tomato", en: "", city: "langkawi", cat: "西餐",
+    coord: [6.2910, 99.7270], price: "RM40-70", dishes: "披萨🍕、意面",
+    icon: "🍕", tags: ["珍南海滩", "娃爱吃"], score: 82 },
+  { name: "卓峰海鲜 Z&F", en: "", city: "langkawi", cat: "海鲜",
+    coord: [6.2900, 99.7280], price: "RM60-90", dishes: "粤式海鲜",
+    icon: "🦀", tags: ["珍南海滩", "晚饭"], score: 84 },
+  { name: "佬食旺肉骨茶", en: "", city: "langkawi", cat: "肉骨茶",
+    coord: [6.3150, 99.8500], price: "RM30-50", dishes: "肉骨茶+油条",
+    icon: "🫖", tags: ["瓜镇", "早餐"], score: 80 },
+  { name: "瓜镇夜市", en: "", city: "langkawi", cat: "夜市",
+    coord: [6.3180, 99.8480], price: "RM10-30", dishes: "榴莲RM30、沙爹",
+    icon: "🌮", tags: ["瓜镇", "晚饭"], score: 85 },
+];
+
+// ====== 工具函数 ======
+function deg2rad(d) { return d * Math.PI / 180; }
+
+function distance(lat1, lng1, lat2, lng2) {
+  var R = 6371;
+  var dLat = deg2rad(lat2 - lat1);
+  var dLng = deg2rad(lng2 - lng1);
+  var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+          Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
+          Math.sin(dLng/2) * Math.sin(dLng/2);
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+}
+
+// ====== 主逻辑 ======
+var userPos = null;
+var currentFilter = "all";
+
+function getCityFilter() {
+  if (!userPos) return "all";
+  // 根据坐标判断在哪个城市附近
+  var dKL = distance(userPos[0], userPos[1], 3.148, 101.705);
+  var dPN = distance(userPos[0], userPos[1], 5.414, 100.332);
+  var dLGK = distance(userPos[0], userPos[1], 6.293, 99.727);
+  var min = Math.min(dKL, dPN, dLGK);
+  if (min < 50) {
+    if (dKL === min) return "kl";
+    if (dPN === min) return "penang";
+    return "langkawi";
+  }
+  return "all";
+}
+
+function render() {
+  var list = RESTAURANTS.filter(function(r) {
+    return currentFilter === "all" || r.city === currentFilter;
+  });
+
+  list.forEach(function(r) {
+    if (userPos) {
+      r.dist = distance(userPos[0], userPos[1], r.coord[0], r.coord[1]);
+    } else {
+      r.dist = 999;
+    }
+  });
+
+  // 有位置时按距离排序，否则按评分
+  list.sort(function(a, b) {
+    if (userPos) return a.dist - b.dist;
+    return b.score - a.score;
+  });
+
+  var html = "";
+  for (var i = 0; i < list.length; i++) {
+    var r = list[i];
+    var distText = userPos && r.dist < 100
+      ? '<span class="dist">' + (r.dist < 1 ? (Math.round(r.dist*1000) + 'm') : (r.dist.toFixed(1) + 'km')) + '</span>'
+      : '<span>' + r.cityName + '</span>';
+    var cityLabel = {kl:"吉隆坡", penang:"槟城", langkawi:"兰卡威"}[r.city] || "";
+    var tagHtml = r.tags.map(function(t) { return '<span>' + t + '</span>'; }).join("");
+
+    html += '<div class="card">';
+    html += '  <div class="icon">' + r.icon + '</div>';
+    html += '  <div class="info">';
+    html += '    <div class="name">' + r.name + ' <small>' + r.en + '</small></div>';
+    html += '    <div class="meta"><span>' + cityLabel + '</span> · <span class="dist">' + distText + '</span> · <span>' + r.cat + '</span></div>';
+    html += '    <div class="price">' + r.price + '</div>';
+    html += '    <div class="tags">' + tagHtml + '</div>';
+    html += '  </div>';
+    html += '</div>';
+  }
+
+  if (list.length === 0) {
+    html = '<div class="loading" style="padding:40px 20px;">该区域暂无收录的餐厅</div>';
+  }
+
+  document.getElementById("results").innerHTML = html;
+}
+
+// ====== 获取位置 ======
+if ("geolocation" in navigator) {
+  navigator.geolocation.getCurrentPosition(
+    function(pos) {
+      userPos = [pos.coords.latitude, pos.coords.longitude];
+      document.getElementById("locStatus").textContent =
+        "📍 " + pos.coords.latitude.toFixed(4) + ", " + pos.coords.longitude.toFixed(4);
+      // 自动切换到所在城市
+      currentFilter = getCityFilter();
+      updateFilterUI();
+      render();
+    },
+    function(err) {
+      document.getElementById("locStatus").textContent = "📍 无法获取位置，显示全部";
+      // 默认显示吉隆坡
+      currentFilter = "kl";
+      updateFilterUI();
+      render();
+    },
+    { enableHighAccuracy: true, timeout: 10000 }
+  );
+} else {
+  document.getElementById("locStatus").textContent = "📍 浏览器不支持定位";
+  currentFilter = "kl";
+  render();
+}
+
+// ====== 筛选按钮 ======
+document.getElementById("filterBar").addEventListener("click", function(e) {
+  if (e.target.classList.contains("btn")) {
+    currentFilter = e.target.dataset.filter;
+    updateFilterUI();
+    render();
+  }
+});
+
+function updateFilterUI() {
+  document.querySelectorAll(".filter-bar .btn").forEach(function(b) {
+    b.classList.toggle("active", b.dataset.filter === currentFilter);
+  });
+}
+
+// 给餐厅加上城市中文名
+RESTAURANTS.forEach(function(r) {
+  r.cityName = {kl:"吉隆坡", penang:"槟城", langkawi:"兰卡威"}[r.city] || "";
+});
+</script>
+</body>
+</html>
