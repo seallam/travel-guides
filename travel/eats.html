@@ -89,6 +89,12 @@ body {
   <h1>🍜 附近美食</h1>
   <div class="sub">基于小红书评分 · 按距离排序</div>
   <div class="loc" id="locStatus">📍 正在获取位置...</div>
+  <div style="margin-top:8px; display:flex; gap:4px; justify-content:center; flex-wrap:wrap;" id="manualLoc">
+    <span style="font-size:12px; opacity:0.7; width:100%;">或手动选择区域：</span>
+    <span class="loc-btn" data-loc="kl" style="font-size:12px; padding:4px 12px; border-radius:12px; background:rgba(255,255,255,0.15); cursor:pointer;">🗼 吉隆坡</span>
+    <span class="loc-btn" data-loc="penang" style="font-size:12px; padding:4px 12px; border-radius:12px; background:rgba(255,255,255,0.15); cursor:pointer;">🍜 槟城</span>
+    <span class="loc-btn" data-loc="langkawi" style="font-size:12px; padding:4px 12px; border-radius:12px; background:rgba(255,255,255,0.15); cursor:pointer;">⛵ 兰卡威</span>
+  </div>
 </div>
 
 <div class="filter-bar" id="filterBar">
@@ -293,6 +299,16 @@ function render() {
   document.getElementById("results").innerHTML = html;
 }
 
+// ====== 手动选择区域 ======
+document.getElementById("manualLoc").addEventListener("click", function(e) {
+  if (e.target.classList.contains("loc-btn")) {
+    currentFilter = e.target.dataset.loc;
+    updateFilterUI();
+    document.getElementById("locStatus").textContent = "📍 " + e.target.textContent.trim();
+    render();
+  }
+});
+
 // ====== 获取位置 ======
 if ("geolocation" in navigator) {
   navigator.geolocation.getCurrentPosition(
@@ -306,9 +322,8 @@ if ("geolocation" in navigator) {
       render();
     },
     function(err) {
-      document.getElementById("locStatus").textContent = "📍 无法获取位置，显示全部";
-      // 默认显示吉隆坡
-      currentFilter = "kl";
+      document.getElementById("locStatus").textContent = "📍 无法获取位置，请手动选择区域";
+      currentFilter = "all";
       updateFilterUI();
       render();
     },
