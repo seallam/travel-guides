@@ -90,6 +90,10 @@ body {
 <div class="header">
   <h1>🍜 附近美食</h1>
   <div class="loc" id="locStatus">📍 定位中...</div>
+  <div style="margin-top:6px; display:flex; gap:6px; justify-content:center; flex-wrap:wrap;">
+    <a href="malaysia-2026.html" style="font-size:12px; color:white; opacity:0.7; text-decoration:none;">🏠 返回首页</a>
+    <a href="eats.html" style="font-size:12px; color:white; opacity:0.7; text-decoration:none;">🔄 刷新定位</a>
+  </div>
   <div class="manual-loc" id="manualLoc">
     <span class="btn" data-loc="all">🌍 全部</span>
     <span class="btn" data-loc="kl">🗼 吉隆坡</span>
@@ -286,7 +290,8 @@ if("geolocation" in navigator){
   navigator.geolocation.getCurrentPosition(
     function(pos){
       userPos=[pos.coords.latitude,pos.coords.longitude];
-      document.getElementById("locStatus").textContent="📍 GPS: "+pos.coords.latitude.toFixed(4)+", "+pos.coords.longitude.toFixed(4);
+      var cityName = getCityName();
+      document.getElementById("locStatus").textContent="📍 "+cityName+" · "+(pos.coords.accuracy<100?"高精度":"约")+pos.coords.latitude.toFixed(4)+","+pos.coords.longitude.toFixed(4);
       autoFilter(); render();
     },function(){
       locateByIP();
@@ -310,6 +315,16 @@ function locateByIP(){
   };
   x.onerror=function(){currentFilter="all";document.getElementById("locStatus").textContent="📍 显示全部";updateUI();render();};
   x.send();
+}
+
+function getCityName(){
+  if(!userPos)return"未知";
+  var dKL=dist(userPos[0],userPos[1],3.148,101.705);
+  var dPN=dist(userPos[0],userPos[1],5.414,100.332);
+  var dLGK=dist(userPos[0],userPos[1],6.293,99.727);
+  var m=Math.min(dKL,dPN,dLGK);
+  if(m>100)return"马来西亚";
+  return dKL===m?"🗼吉隆坡":dPN===m?"🍜槟城":"⛵兰卡威";
 }
 
 function autoFilter(){
